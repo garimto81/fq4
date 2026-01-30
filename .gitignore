@@ -1,0 +1,40 @@
+# FQ4 Remake Project .gitignore
+
+# Game binary files (large, copyrighted)
+GAME/
+DOSBox.exe
+SDL.dll
+SDL_net.dll
+dosbox.conf
+PLAY.BAT
+*.lnk
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+venv/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Output (generated files)
+output/
+
+# OMC state files
+.omc/
+
+# Temp
+*.tmp
+*.bak
