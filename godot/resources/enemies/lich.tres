@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lich"
+display_name = "Lich"
+description = "An undead sorcerer with powerful dark magic"
+enemy_type = 4
+base_hp = 80
+base_mp = 100
+base_atk = 8
+base_def = 4
+base_spd = 70
+base_lck = 3
+attack_range = 100.0
+detection_range = 180.0
+ai_tick_interval = 0.4
+exp_reward = 55
+gold_reward = 50
+drop_table = []
+hp_per_level = 10
+atk_per_level = 1
+def_per_level = 1

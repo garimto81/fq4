@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "desert_arrival"
+title = "사막 도착"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "뜨거운 태양 아래, 끝없이 펼쳐진 모래언덕. 일행은 사막의 혹독함을 온몸으로 느끼고 있었다.",
+"next": "alein_exhausted"
+}, {
+"id": "alein_exhausted",
+"speaker": "알레인",
+"portrait": "",
+"text": "하아... 하아... 숨이 막혀요. 이 더위는 정말...",
+"next": "taro_concern"
+}, {
+"id": "taro_concern",
+"speaker": "타로",
+"portrait": "",
+"text": "물이 얼마 남지 않았어. 이대로 가다간 일행 모두 탈진할 거야.",
+"next": "ares_observe"
+}, {
+"id": "ares_observe",
+"speaker": "아레스",
+"portrait": "",
+"text": "(주변을 둘러본다) 저기... 저 멀리 야자수가 보여. 오아시스가 있을지도.",
+"next": "alein_hope"
+}, {
+"id": "alein_hope",
+"speaker": "알레인",
+"portrait": "",
+"text": "정말요? 그럼 빨리 가요!",
+"next": "taro_warning"
+}, {
+"id": "taro_warning",
+"speaker": "타로",
+"portrait": "",
+"text": "잠깐, 신기루일 수도 있어. 사막에선 눈을 속이는 게 많거든.",
+"choices": [{
+"text": "오아시스로 향한다",
+"next": "choice_oasis"
+}, {
+"text": "현재 위치에서 휴식한다",
+"next": "choice_rest"
+}]
+}, {
+"id": "choice_oasis",
+"speaker": "아레스",
+"portrait": "",
+"text": "신기루든 아니든 확인해봐야지. 가보자.",
+"event": "set_flag:desert_goto_oasis",
+"next": "move_oasis"
+}, {
+"id": "choice_rest",
+"speaker": "아레스",
+"portrait": "",
+"text": "무리하면 안 돼. 여기서 잠깐 쉬었다가 다시 움직이자.",
+"event": "set_flag:desert_rest_here",
+"next": "rest_result"
+}, {
+"id": "move_oasis",
+"speaker": "나레이터",
+"portrait": "",
+"text": "일행은 희망을 품고 오아시스를 향해 걸어갔다.",
+"next": ""
+}, {
+"id": "rest_result",
+"speaker": "나레이터",
+"portrait": "",
+"text": "일행은 모래 그늘에서 짧은 휴식을 취했다. 체력이 약간 회복되었다.",
+"event": "restore_party_stamina:30",
+"next": ""
+}]

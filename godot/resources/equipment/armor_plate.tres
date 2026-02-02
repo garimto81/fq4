@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/equipment/equipment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "armor_plate"
+display_name = "Plate Armor"
+description = "Heavy plate armor. High defense but reduces speed"
+slot = 1
+weapon_type = 5
+bonus_hp = 0
+bonus_mp = 0
+bonus_atk = 0
+bonus_def = 7
+bonus_spd = -10
+bonus_lck = 0
+attack_range_bonus = 0.0
+critical_chance_bonus = 0.0
+evasion_bonus = 0.0
+required_level = 3
+buy_price = 300
+sell_price = 150

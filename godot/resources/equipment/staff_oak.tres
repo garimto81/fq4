@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/equipment/equipment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "staff_oak"
+display_name = "Oak Staff"
+description = "A wooden staff that enhances magical power"
+slot = 0
+weapon_type = 4
+bonus_hp = 0
+bonus_mp = 20
+bonus_atk = 2
+bonus_def = 0
+bonus_spd = 0
+bonus_lck = 0
+attack_range_bonus = 0.0
+critical_chance_bonus = 0.0
+evasion_bonus = 0.0
+required_level = 1
+buy_price = 90
+sell_price = 45

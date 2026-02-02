@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "potion_hp_medium"
+display_name = "Medium HP Potion"
+description = "Restores 150 HP"
+item_type = 0
+max_stack = 99
+buy_price = 150
+sell_price = 75
+effect_type = 1
+effect_value = 150
+effect_duration = 0.0

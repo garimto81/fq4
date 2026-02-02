@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 2
+chapter_name = "동료 모집"
+chapter_subtitle = "힘을 모아"
+description = "고블린 족장을 물리친 용사 일행은 더 강한 적들에 대비해 동료를 모집하기로 한다.
+각지에서 뛰어난 전사들을 찾아 나서는 여정이 시작된다."
+maps = ["res://scenes/maps/chapter2/village_square.tscn", "res://scenes/maps/chapter2/training_grounds.tscn", "res://scenes/maps/chapter2/mercenary_guild.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter2/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter2/chapter2_clear.tres"
+clear_flags = ["ally_recruited", "forest_cleared"]
+boss_map = ""
+boss_enemy_id = ""
+bgm_path = "res://assets/audio/bgm/chapter2_theme.ogg"

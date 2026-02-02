@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1_enemy"]
+
+[resource]
+script = ExtResource("1_enemy")
+id = "goblin_archer"
+display_name = "고블린 궁수"
+description = "원거리에서 독화살을 쏘는 고블린. 근접전에 약하다."
+enemy_type = 0
+base_hp = 30
+base_mp = 15
+base_atk = 10
+base_def = 1
+base_spd = 80
+base_lck = 5
+attack_range = 150.0
+detection_range = 200.0
+ai_tick_interval = 0.5
+exp_reward = 10
+gold_reward = 5
+drop_table = []
+hp_per_level = 6
+atk_per_level = 2
+def_per_level = 1

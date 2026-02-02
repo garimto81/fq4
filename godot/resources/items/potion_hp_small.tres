@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "potion_hp_small"
+display_name = "Small HP Potion"
+description = "Restores 50 HP"
+item_type = 0
+max_stack = 99
+buy_price = 50
+sell_price = 25
+effect_type = 1
+effect_value = 50
+effect_duration = 0.0

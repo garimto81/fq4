@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "bandit_ambush"
+title = "산적 매복"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "유적으로 향하는 길목. 갑자기 사방에서 산적들이 나타났다!",
+"next": "bandit_leader"
+}, {
+"id": "bandit_leader",
+"speaker": "산적 두목",
+"portrait": "",
+"text": "크크크, 사막을 지나가려면 통행료를 내야지! 어디 주머니가 두둑해 보이는데?",
+"next": "ares_ready"
+}, {
+"id": "ares_ready",
+"speaker": "아레스",
+"portrait": "",
+"text": "(검을 뽑는다) 우리한텐 시간이 없어. 비켜라.",
+"next": "bandit_laugh"
+}, {
+"id": "bandit_laugh",
+"speaker": "산적 두목",
+"portrait": "",
+"text": "하하하! 겁도 없는 녀석들이구만. 좋아, 힘으로 빼앗지!",
+"next": "taro_count"
+}, {
+"id": "taro_count",
+"speaker": "타로",
+"portrait": "",
+"text": "(주변을 본다) 10명... 아니 15명은 넘겠는데!",
+"next": "alein_ready"
+}, {
+"id": "alein_ready",
+"speaker": "알레인",
+"portrait": "",
+"text": "수가 많아도 우린 물러설 수 없어요!",
+"next": "ares_strategy"
+}, {
+"id": "ares_strategy",
+"speaker": "아레스",
+"portrait": "",
+"text": "타로, 넌 왼쪽! 알레인, 넌 뒤를 봐! 저 두목은 내가 맡는다!",
+"choices": [{
+"text": "정면 돌파",
+"next": "choice_frontal"
+}, {
+"text": "방어 위주",
+"next": "choice_defend"
+}, {
+"text": "각개격파",
+"next": "choice_divide"
+}]
+}, {
+"id": "choice_frontal",
+"speaker": "아레스",
+"portrait": "",
+"text": "한방에 끝낸다! 돌파한다!",
+"event": "set_battle_strategy:frontal",
+"next": "battle_start"
+}, {
+"id": "choice_defend",
+"speaker": "타로",
+"portrait": "",
+"text": "좋아, 방어를 단단히 하고 틈을 노리자!",
+"event": "set_battle_strategy:defend",
+"next": "battle_start"
+}, {
+"id": "choice_divide",
+"speaker": "알레인",
+"portrait": "",
+"text": "하나씩 처리하는 게 안전해요!",
+"event": "set_battle_strategy:divide",
+"next": "battle_start"
+}, {
+"id": "battle_start",
+"speaker": "산적 두목",
+"portrait": "",
+"text": "덤벼라! 녀석들을 혼내줘!",
+"event": "start_battle:bandit_ambush",
+"next": "battle_taunt"
+}, {
+"id": "battle_taunt",
+"speaker": "산적 두목",
+"portrait": "",
+"text": "크큭, 후회할 거다! 우리 산적단은 사막에서 무적이지!",
+"next": ""
+}]

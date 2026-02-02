@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "strength_potion"
+display_name = "Strength Potion"
+description = "Increases ATK by 5 for 30 seconds"
+item_type = 0
+max_stack = 99
+buy_price = 200
+sell_price = 100
+effect_type = 4
+effect_value = 5
+effect_duration = 30.0

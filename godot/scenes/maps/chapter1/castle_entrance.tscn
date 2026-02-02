@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=3 uid="uid://castle_entrance_map"]
+
+[ext_resource type="Script" path="res://scripts/map/map_data.gd" id="1_mapdata"]
+[ext_resource type="Script" path="res://scripts/events/event_trigger.gd" id="2_trigger"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_intro"]
+size = Vector2(100, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(50, 100)
+
+[node name="CastleEntrance" type="Node2D"]
+
+[node name="MapData" type="Node" parent="."]
+script = ExtResource("1_mapdata")
+map_id = "castle_entrance"
+map_name = "성문 앞"
+chapter = 1
+map_width = 1600
+map_height = 1000
+map_type = "Field"
+connections = {"exit_east": {"map": "res://scenes/maps/chapter1/forest_path.tscn", "spawn": "from_castle"}}
+entry_events = ["chapter1_intro"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1600.0
+offset_bottom = 1000.0
+color = Color(0.3, 0.35, 0.25, 1)
+
+[node name="CastleWall" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 1000.0
+color = Color(0.4, 0.35, 0.3, 1)
+
+[node name="CastleGate" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 400.0
+offset_right = 100.0
+offset_bottom = 600.0
+color = Color(0.25, 0.2, 0.15, 1)
+
+[node name="Road" type="ColorRect" parent="."]
+offset_left = 100.0
+offset_top = 400.0
+offset_right = 1600.0
+offset_bottom = 600.0
+color = Color(0.45, 0.4, 0.35, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, 500)
+
+[node name="from_forest" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1500, 500)
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="Goblin1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(600, 450)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(700, 550)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin3" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(800, 480)
+metadata/enemy_id = "goblin"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="IntroTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(300, 500)
+script = ExtResource("2_trigger")
+trigger_id = "castle_intro"
+one_shot = true
+event_type = "Dialogue"
+dialogue_path = "res://resources/dialogues/chapter1/intro.tres"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/IntroTrigger"]
+shape = SubResource("RectangleShape2D_intro")
+
+[node name="TutorialTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(500, 500)
+script = ExtResource("2_trigger")
+trigger_id = "tutorial_start"
+one_shot = true
+required_flags = ["tutorial_started"]
+event_type = "Dialogue"
+dialogue_path = "res://resources/dialogues/chapter1/tutorial.tres"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TutorialTrigger"]
+shape = SubResource("RectangleShape2D_intro")
+
+[node name="ExitToForest" type="Area2D" parent="Triggers"]
+position = Vector2(1550, 500)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_forest"
+one_shot = false
+required_flags = ["tutorial_complete"]
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter1/forest_path.tscn"
+spawn_point = "from_castle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToForest"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="MapNameLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 50.0
+text = "성문 앞 - 튜토리얼"

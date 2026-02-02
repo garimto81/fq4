@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "goblin_chief_taunt"
+title = "Goblin Chief Boss Encounter"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "Alein",
+"text": "This must be their hideout. The stench is overwhelming...",
+"next": "node_1"
+}, {
+"id": "node_1",
+"speaker": "Taro",
+"text": "I smell something worse than goblins. Stay sharp!",
+"next": "chief_appears"
+}, {
+"id": "chief_appears",
+"speaker": "Goblin Chief",
+"text": "GRAAAAGH! More human meat walk into Grog's lair!",
+"next": "chief_appears_2"
+}, {
+"id": "chief_appears_2",
+"speaker": "Goblin Chief",
+"text": "You kill many of Grog's warriors. Now Grog kill YOU!",
+"next": "player_response"
+}, {
+"id": "player_response",
+"speaker": "Ares",
+"text": "So you're the one behind the attacks on Levell Village!",
+"next": "player_response_2"
+}, {
+"id": "player_response_2",
+"speaker": "Goblin Chief",
+"text": "Kyahaha! Weak humans! Run away like cowards! Village is MINE now!",
+"choices": [
+{"text": "We'll drive you out!", "next": "heroic_path"},
+{"text": "What do you want with the village?", "next": "question_path"}
+]
+}, {
+"id": "heroic_path",
+"speaker": "Goblin Chief",
+"text": "Brave words! But Grog crush brave humans FIRST! Gyahahaha!",
+"next": "battle_prep"
+}, {
+"id": "question_path",
+"speaker": "Goblin Chief",
+"text": "Want? Grog take what Grog want! Food, gold, women!",
+"next": "question_path_2"
+}, {
+"id": "question_path_2",
+"speaker": "Goblin Chief",
+"text": "But... dark master promise more. Much more. If Grog serve well.",
+"next": "dark_master_reveal"
+}, {
+"id": "dark_master_reveal",
+"speaker": "Taro",
+"text": "Dark master?! Someone's commanding these beasts!",
+"next": "dark_master_reveal_2"
+}, {
+"id": "dark_master_reveal_2",
+"speaker": "Goblin Chief",
+"text": "Enough talk! Grog no tell secrets to dead meat! ATTACK!",
+"next": "battle_prep"
+}, {
+"id": "battle_prep",
+"speaker": "Alein",
+"text": "He's much stronger than the others! Be careful!",
+"next": "battle_prep_2"
+}, {
+"id": "battle_prep_2",
+"speaker": "Taro",
+"text": "I'll draw his attention! Hit him from the sides!",
+"next": "final_taunt"
+}, {
+"id": "final_taunt",
+"speaker": "Goblin Chief",
+"text": "Come, little humans! Grog show you TRUE POWER!",
+"next": "end",
+"event": "set_flag:boss_encountered"
+}, {
+"id": "end",
+"speaker": "System",
+"text": "[BOSS BATTLE START]",
+"event": "start_battle:goblin_chief"
+}]

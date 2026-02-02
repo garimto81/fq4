@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxm8f5bnw2rx7"]
+
+[sub_resource type="Curve" id="Curve_scale"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.2, 1.5), 0.0, 0.0, 0, 0, Vector2(0.8, 1.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_color"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 1, 0.3, 1, 1, 0.9, 0.5, 1, 1, 0.7, 0.3, 0.8, 1, 0.5, 0, 0)
+
+[sub_resource type="Curve" id="Curve_velocity"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="LevelUpParticle" type="CPUParticles2D"]
+emitting = false
+amount = 48
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.7
+randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 24.0
+direction = Vector2(0, -1)
+spread = 360.0
+gravity = Vector2(0, -80)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+damping_min = 20.0
+damping_max = 40.0
+damping_curve = SubResource("Curve_velocity")
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_scale")
+color_ramp = SubResource("Gradient_color")
+
+[node name="AuraRing" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0.3, 0.6)
+scale = Vector2(0.1, 0.1)
+
+[node name="RingAnimation" type="AnimationPlayer" parent="AuraRing"]
+
+[node name="Glow" type="PointLight2D" parent="."]
+energy = 2.0
+texture_scale = 3.0
+color = Color(1, 0.9, 0.3, 1)
+
+[node name="StarBurst" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 1.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+scale_amount_min = 1.5
+scale_amount_max = 2.5
+color = Color(1, 1, 1, 1)

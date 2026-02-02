@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "forest_ambush"
+title = "Forest Ambush"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "Alein",
+"text": "Wait! I hear something...",
+"next": "node_1"
+}, {
+"id": "node_1",
+"speaker": "Ares",
+"text": "The trees... they're too quiet. No birds, no insects.",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "Alein",
+"text": "An ambush! Get ready!",
+"next": "ambush_reveal"
+}, {
+"id": "ambush_reveal",
+"speaker": "Goblin Scout",
+"text": "Gyahaha! Humans walk into trap!",
+"next": "ambush_reveal_2"
+}, {
+"id": "ambush_reveal_2",
+"speaker": "Goblin Scout",
+"text": "Boss will reward us! Kill them!",
+"next": "battle_start"
+}, {
+"id": "battle_start",
+"speaker": "Ares",
+"text": "They were waiting for us! Stay alert, Alein!",
+"next": "battle_start_2"
+}, {
+"id": "battle_start_2",
+"speaker": "Alein",
+"text": "Watch your flanks! Don't let them surround us!",
+"next": "end",
+"event": "set_flag:ambush_triggered"
+}, {
+"id": "end",
+"speaker": "System",
+"text": "[COMBAT START]",
+"event": "start_battle:forest_ambush"
+}]

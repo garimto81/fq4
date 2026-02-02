@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bomb"
+display_name = "Bomb"
+description = "Deals 50 damage in an area"
+item_type = 0
+max_stack = 99
+buy_price = 120
+sell_price = 60
+effect_type = 0
+effect_value = 50
+effect_duration = 0.0

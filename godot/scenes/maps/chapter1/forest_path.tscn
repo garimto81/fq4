@@ -1,0 +1,155 @@
+[gd_scene load_steps=5 format=3 uid="uid://forest_path_map"]
+
+[ext_resource type="Script" path="res://scripts/map/map_data.gd" id="1_mapdata"]
+[ext_resource type="Script" path="res://scripts/events/event_trigger.gd" id="2_trigger"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(50, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wide"]
+size = Vector2(100, 200)
+
+[node name="ForestPath" type="Node2D"]
+
+[node name="MapData" type="Node" parent="."]
+script = ExtResource("1_mapdata")
+map_id = "forest_path"
+map_name = "숲 속 길"
+chapter = 1
+map_width = 2000
+map_height = 1200
+map_type = "Field"
+connections = {"exit_west": {"map": "res://scenes/maps/chapter1/castle_entrance.tscn", "spawn": "from_forest"}, "exit_east": {"map": "res://scenes/maps/chapter1/goblin_camp.tscn", "spawn": "from_forest"}}
+entry_events = []
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 2000.0
+offset_bottom = 1200.0
+color = Color(0.15, 0.3, 0.15, 1)
+
+[node name="Path" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 500.0
+offset_right = 2000.0
+offset_bottom = 700.0
+color = Color(0.4, 0.35, 0.25, 1)
+
+[node name="Tree1" type="ColorRect" parent="."]
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 280.0
+offset_bottom = 400.0
+color = Color(0.3, 0.5, 0.25, 1)
+
+[node name="Tree2" type="ColorRect" parent="."]
+offset_left = 500.0
+offset_top = 150.0
+offset_right = 600.0
+offset_bottom = 450.0
+color = Color(0.25, 0.45, 0.2, 1)
+
+[node name="Tree3" type="ColorRect" parent="."]
+offset_left = 400.0
+offset_top = 750.0
+offset_right = 500.0
+offset_bottom = 1100.0
+color = Color(0.28, 0.48, 0.22, 1)
+
+[node name="Tree4" type="ColorRect" parent="."]
+offset_left = 1200.0
+offset_top = 100.0
+offset_right = 1300.0
+offset_bottom = 400.0
+color = Color(0.26, 0.46, 0.21, 1)
+
+[node name="Tree5" type="ColorRect" parent="."]
+offset_left = 1500.0
+offset_top = 800.0
+offset_right = 1620.0
+offset_bottom = 1150.0
+color = Color(0.27, 0.47, 0.22, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(100, 600)
+
+[node name="from_castle" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(100, 600)
+
+[node name="from_camp" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1900, 600)
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="Goblin1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(600, 550)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(750, 650)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin3" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(1000, 580)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin4" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(1200, 620)
+metadata/enemy_id = "goblin"
+
+[node name="GoblinArcher1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(900, 400)
+metadata/enemy_id = "goblin_archer"
+
+[node name="GoblinArcher2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(1100, 750)
+metadata/enemy_id = "goblin_archer"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="ExitToCastle" type="Area2D" parent="Triggers"]
+position = Vector2(25, 600)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_castle"
+one_shot = false
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter1/castle_entrance.tscn"
+spawn_point = "from_forest"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToCastle"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="ExitToCamp" type="Area2D" parent="Triggers"]
+position = Vector2(1975, 600)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_camp"
+one_shot = false
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter1/goblin_camp.tscn"
+spawn_point = "from_forest"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToCamp"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="AmbushTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(800, 600)
+script = ExtResource("2_trigger")
+trigger_id = "forest_ambush"
+one_shot = true
+event_type = "Battle"
+enemy_ids = ["goblin", "goblin", "goblin_archer"]
+on_victory_flag = "forest_ambush_cleared"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/AmbushTrigger"]
+shape = SubResource("RectangleShape2D_wide")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="MapNameLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 50.0
+text = "숲 속 길"

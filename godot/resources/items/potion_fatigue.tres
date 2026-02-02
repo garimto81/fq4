@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "potion_fatigue"
+display_name = "Stamina Potion"
+description = "Reduces fatigue by 30"
+item_type = 0
+max_stack = 99
+buy_price = 80
+sell_price = 40
+effect_type = 3
+effect_value = 30
+effect_duration = 0.0

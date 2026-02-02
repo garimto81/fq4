@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 1
+chapter_name = "프롤로그"
+chapter_subtitle = "왕국 침공"
+description = "평화롭던 왕국에 갑작스러운 마물 군단이 침공해왔다.
+성문 앞에서 첫 번째 전투가 시작되고, 용사는 동료들과 함께 왕국을 지키기 위한 여정을 시작한다."
+maps = ["res://scenes/maps/chapter1/castle_entrance.tscn", "res://scenes/maps/chapter1/forest_path.tscn", "res://scenes/maps/chapter1/goblin_camp.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter1/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter1/chapter1_clear.tres"
+clear_flags = ["tutorial_complete", "goblin_boss_defeated"]
+boss_map = "res://scenes/maps/chapter1/goblin_camp.tscn"
+boss_enemy_id = "goblin_chief"
+bgm_path = "res://assets/audio/bgm/chapter1_theme.ogg"

@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter2_start"
+title = "Chapter 2 - 사막 지역 진입"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "Chapter 2 - 사막의 추적. 아레스와 일행은 바르시아를 쫓아 드넓은 사막으로 발을 내딛었다.",
+"next": "ares_1"
+}, {
+"id": "ares_1",
+"speaker": "아레스",
+"portrait": "",
+"text": "바르시아의 흔적이 이쪽으로 향하고 있어. 사막으로 도망쳤나...",
+"next": "alein_1"
+}, {
+"id": "alein_1",
+"speaker": "알레인",
+"portrait": "",
+"text": "이 더위... 사막은 처음인데, 생각보다 혹독하군요.",
+"next": "taro_1"
+}, {
+"id": "taro_1",
+"speaker": "타로",
+"portrait": "",
+"text": "물과 식량을 아껴 써야 해. 사막에서 길을 잃으면 끝이야.",
+"next": "ares_2"
+}, {
+"id": "ares_2",
+"speaker": "아레스",
+"portrait": "",
+"text": "그래도 가야 해. 바르시아를 놓칠 순 없어.",
+"choices": [{
+"text": "신중하게 추적한다",
+"next": "choice_careful"
+}, {
+"text": "서둘러 추격한다",
+"next": "choice_rush"
+}]
+}, {
+"id": "choice_careful",
+"speaker": "알레인",
+"portrait": "",
+"text": "현명한 판단이에요. 천천히 가더라도 안전하게 가는 게 낫죠.",
+"event": "set_flag:desert_approach_careful",
+"next": "depart"
+}, {
+"id": "choice_rush",
+"speaker": "타로",
+"portrait": "",
+"text": "좋아, 속전속결이다! 바르시아가 너무 멀리 가기 전에 따라잡자!",
+"event": "set_flag:desert_approach_rush",
+"next": "depart"
+}, {
+"id": "depart",
+"speaker": "나레이터",
+"portrait": "",
+"text": "일행은 사막의 뜨거운 모래바람을 맞으며 전진했다.",
+"event": "start_chapter2_exploration",
+"next": ""
+}]

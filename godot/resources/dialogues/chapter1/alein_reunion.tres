@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "alein_reunion"
+title = "Alein Reunion"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "Ares",
+"text": "That was close... Thanks for the healing, Alein.",
+"next": "node_1"
+}, {
+"id": "node_1",
+"speaker": "Alein",
+"text": "You're a natural fighter, Ares. But... forgive me for asking...",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "Alein",
+"text": "How did you end up on that battlefield? You don't seem like a common soldier.",
+"choices": [
+{"text": "I don't remember much...", "next": "amnesia_path"},
+{"text": "I was protecting someone.", "next": "protector_path"}
+]
+}, {
+"id": "amnesia_path",
+"speaker": "Ares",
+"text": "Everything before waking up is... hazy. Like a dream I can't quite recall.",
+"next": "amnesia_path_2"
+}, {
+"id": "amnesia_path_2",
+"speaker": "Alein",
+"text": "Memory loss after head trauma isn't uncommon. Perhaps it will return in time.",
+"next": "backstory"
+}, {
+"id": "protector_path",
+"speaker": "Ares",
+"text": "There was a girl... I think. Someone important. I had to save her.",
+"next": "protector_path_2"
+}, {
+"id": "protector_path_2",
+"speaker": "Alein",
+"text": "A girl? ...I see. Then we must find out what happened to her.",
+"next": "backstory"
+}, {
+"id": "backstory",
+"speaker": "Alein",
+"text": "I travel the land healing the wounded. It's my calling as a cleric.",
+"next": "backstory_2"
+}, {
+"id": "backstory_2",
+"speaker": "Alein",
+"text": "But these goblin attacks... they're organized. Too organized for mere beasts.",
+"next": "foreshadowing"
+}, {
+"id": "foreshadowing",
+"speaker": "Ares",
+"text": "You think someone is controlling them?",
+"next": "foreshadowing_2"
+}, {
+"id": "foreshadowing_2",
+"speaker": "Alein",
+"text": "Perhaps. We'll need to investigate deeper into their territory to know for sure.",
+"next": "end"
+}, {
+"id": "end",
+"speaker": "Alein",
+"text": "But first, let's make sure the village is safe.",
+"event": "set_flag:alein_backstory_learned"
+}]

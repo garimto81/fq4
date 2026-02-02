@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5x8q3r7mjh9k"]
+
+[sub_resource type="Curve" id="Curve_scale"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3, 1.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(0.3, 0.3, 0.3, 1, 0.4, 0.4, 0.4, 0.8, 0.5, 0.5, 0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_blood"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.8, 0.1, 0.1, 1, 0.6, 0.1, 0.1, 0.6, 0.3, 0.05, 0.05, 0)
+
+[node name="DeathParticle" type="Node2D"]
+
+[node name="BloodSplatter" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 12.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 120.0
+initial_velocity_max = 200.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_min = 0.8
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_scale")
+color_ramp = SubResource("Gradient_blood")
+
+[node name="SmokeCloud" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.6
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_scale")
+color_ramp = SubResource("Gradient_smoke")
+
+[node name="BodyFade" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 1)
+
+[node name="FadeTimer" type="Timer" parent="BodyFade"]
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[node name="DissolveEffect" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)

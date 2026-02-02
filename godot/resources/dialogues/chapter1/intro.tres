@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter1_intro"
+title = "프롤로그 - 왕국 침공"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "평화롭던 왕국, 그 평온한 나날은 갑작스러운 침공과 함께 산산이 부서졌다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "성문 앞, 마물들의 무리가 밀려들어온다. 왕국의 기사들은 필사적으로 방어선을 구축하지만...",
+"next": "soldier_1"
+}, {
+"id": "soldier_1",
+"speaker": "병사",
+"portrait": "",
+"text": "안 돼! 너무 많아! 방어선이 뚫리고 있다!",
+"next": "captain_1"
+}, {
+"id": "captain_1",
+"speaker": "기사단장",
+"portrait": "",
+"text": "물러서지 마라! 성문만은 지켜야 한다!",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "...",
+"choices": [{
+"text": "검을 들어 싸운다",
+"next": "choice_fight"
+}, {
+"text": "주위를 살핀다",
+"next": "choice_observe"
+}]
+}, {
+"id": "choice_fight",
+"speaker": "기사단장",
+"portrait": "",
+"text": "좋아! 네 용기가 필요하다. 저 고블린들을 먼저 처리해라!",
+"event": "set_flag:intro_choice_fight",
+"next": "tutorial_start"
+}, {
+"id": "choice_observe",
+"speaker": "주인공",
+"portrait": "",
+"text": "(적의 움직임을 관찰한다. 고블린들이 중앙을 돌파하려는 것 같다...)",
+"event": "set_flag:intro_choice_observe",
+"next": "captain_observe"
+}, {
+"id": "captain_observe",
+"speaker": "기사단장",
+"portrait": "",
+"text": "잘 봤다! 중앙을 노리는군. 가서 막아라!",
+"next": "tutorial_start"
+}, {
+"id": "tutorial_start",
+"speaker": "시스템",
+"portrait": "",
+"text": "[튜토리얼] 방향키로 이동, Z키로 공격합니다. 적에게 다가가 공격하세요.",
+"event": "set_flag:tutorial_started",
+"next": ""
+}]

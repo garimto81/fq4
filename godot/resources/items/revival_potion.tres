@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/items/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "revival_potion"
+display_name = "Revival Potion"
+description = "Revives fallen ally with 50% HP"
+item_type = 0
+max_stack = 10
+buy_price = 500
+sell_price = 250
+effect_type = 7
+effect_value = 50
+effect_duration = 0.0

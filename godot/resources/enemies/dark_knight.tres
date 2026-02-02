@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dark_knight"
+display_name = "Dark Knight"
+description = "A heavily armored knight corrupted by darkness"
+enemy_type = 1
+base_hp = 150
+base_mp = 20
+base_atk = 18
+base_def = 12
+base_spd = 60
+base_lck = 4
+attack_range = 45.0
+detection_range = 150.0
+ai_tick_interval = 0.45
+exp_reward = 50
+gold_reward = 40
+drop_table = []
+hp_per_level = 18
+atk_per_level = 2
+def_per_level = 2

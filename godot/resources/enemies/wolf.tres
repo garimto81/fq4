@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "wolf"
+display_name = "Wolf"
+description = "A fierce wild wolf with high speed"
+enemy_type = 0
+base_hp = 35
+base_mp = 0
+base_atk = 6
+base_def = 2
+base_spd = 120
+base_lck = 8
+attack_range = 50.0
+detection_range = 200.0
+ai_tick_interval = 0.3
+exp_reward = 10
+gold_reward = 5
+drop_table = []
+hp_per_level = 8
+atk_per_level = 2
+def_per_level = 1

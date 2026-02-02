@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "goblin_boss_victory"
+title = "고블린 족장 처치"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "거대한 고블린이 무릎을 꿇고 쓰러진다.",
+"next": "boss_fall"
+}, {
+"id": "boss_fall",
+"speaker": "고블린 족장",
+"portrait": "",
+"text": "으으으... 이럴 수가... 인간에게...",
+"next": "boss_last"
+}, {
+"id": "boss_last",
+"speaker": "고블린 족장",
+"portrait": "",
+"text": "하지만... 이건 시작일 뿐이야... 더 강한 자들이... 오고 있다...",
+"next": "boss_death"
+}, {
+"id": "boss_death",
+"speaker": "나레이터",
+"portrait": "",
+"text": "고블린 족장이 쓰러졌다. 주변의 고블린들이 공포에 질려 도망치기 시작한다.",
+"next": "ally_celebrate"
+}, {
+"id": "ally_celebrate",
+"speaker": "동료",
+"portrait": "",
+"text": "해냈어! 정말로 해냈어!",
+"next": "hero_thought"
+}, {
+"id": "hero_thought",
+"speaker": "주인공",
+"portrait": "",
+"text": "더 강한 자들이 온다... 준비를 해야겠어.",
+"next": "captain_arrival"
+}, {
+"id": "captain_arrival",
+"speaker": "기사단장",
+"portrait": "",
+"text": "잘했다! 네 덕분에 성문을 지킬 수 있었다.",
+"next": "captain_2"
+}, {
+"id": "captain_2",
+"speaker": "기사단장",
+"portrait": "",
+"text": "하지만 저 놈의 말이 맞다면... 더 강한 적들이 올 것이다.",
+"next": "captain_3"
+}, {
+"id": "captain_3",
+"speaker": "기사단장",
+"portrait": "",
+"text": "동료를 모아라. 혼자서는 맞설 수 없는 적들이 있을 것이다.",
+"next": "complete"
+}, {
+"id": "complete",
+"speaker": "시스템",
+"portrait": "",
+"text": "[챕터 1 완료] 다음 챕터: 동료 모집",
+"event": "set_flag:goblin_boss_defeated",
+"next": ""
+}]

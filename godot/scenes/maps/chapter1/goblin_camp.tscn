@@ -1,0 +1,207 @@
+[gd_scene load_steps=6 format=3 uid="uid://goblin_camp_map"]
+
+[ext_resource type="Script" path="res://scripts/map/map_data.gd" id="1_mapdata"]
+[ext_resource type="Script" path="res://scripts/events/event_trigger.gd" id="2_trigger"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(50, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(150, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_camp"]
+size = Vector2(200, 200)
+
+[node name="GoblinCamp" type="Node2D"]
+
+[node name="MapData" type="Node" parent="."]
+script = ExtResource("1_mapdata")
+map_id = "goblin_camp"
+map_name = "고블린 캠프"
+chapter = 1
+map_width = 1800
+map_height = 1400
+map_type = "Boss"
+connections = {"exit_west": {"map": "res://scenes/maps/chapter1/forest_path.tscn", "spawn": "from_camp"}}
+entry_events = []
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1800.0
+offset_bottom = 1400.0
+color = Color(0.25, 0.2, 0.15, 1)
+
+[node name="CampGround" type="ColorRect" parent="."]
+offset_left = 400.0
+offset_top = 400.0
+offset_right = 1400.0
+offset_bottom = 1000.0
+color = Color(0.35, 0.3, 0.2, 1)
+
+[node name="BossTent" type="ColorRect" parent="."]
+offset_left = 1100.0
+offset_top = 500.0
+offset_right = 1350.0
+offset_bottom = 800.0
+color = Color(0.5, 0.2, 0.2, 1)
+
+[node name="Tent1" type="ColorRect" parent="."]
+offset_left = 500.0
+offset_top = 450.0
+offset_right = 650.0
+offset_bottom = 600.0
+color = Color(0.4, 0.35, 0.25, 1)
+
+[node name="Tent2" type="ColorRect" parent="."]
+offset_left = 550.0
+offset_top = 700.0
+offset_right = 700.0
+offset_bottom = 850.0
+color = Color(0.4, 0.35, 0.25, 1)
+
+[node name="Tent3" type="ColorRect" parent="."]
+offset_left = 800.0
+offset_top = 500.0
+offset_right = 950.0
+offset_bottom = 650.0
+color = Color(0.4, 0.35, 0.25, 1)
+
+[node name="Campfire" type="ColorRect" parent="."]
+offset_left = 750.0
+offset_top = 680.0
+offset_right = 820.0
+offset_bottom = 750.0
+color = Color(0.9, 0.4, 0.1, 1)
+
+[node name="Fence1" type="ColorRect" parent="."]
+offset_left = 350.0
+offset_top = 350.0
+offset_right = 1450.0
+offset_bottom = 370.0
+color = Color(0.3, 0.25, 0.15, 1)
+
+[node name="Fence2" type="ColorRect" parent="."]
+offset_left = 350.0
+offset_top = 1030.0
+offset_right = 1450.0
+offset_bottom = 1050.0
+color = Color(0.3, 0.25, 0.15, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, 700)
+
+[node name="from_forest" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, 700)
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="Goblin1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(500, 550)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(600, 750)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin3" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(750, 600)
+metadata/enemy_id = "goblin"
+
+[node name="Goblin4" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(850, 800)
+metadata/enemy_id = "goblin"
+
+[node name="GoblinArcher1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(550, 450)
+metadata/enemy_id = "goblin_archer"
+
+[node name="GoblinArcher2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(950, 500)
+metadata/enemy_id = "goblin_archer"
+
+[node name="GoblinArcher3" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(600, 900)
+metadata/enemy_id = "goblin_archer"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="ExitToForest" type="Area2D" parent="Triggers"]
+position = Vector2(25, 700)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_forest_from_camp"
+one_shot = false
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter1/forest_path.tscn"
+spawn_point = "from_camp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToForest"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="CampEntryTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(450, 700)
+script = ExtResource("2_trigger")
+trigger_id = "camp_entry_battle"
+one_shot = true
+event_type = "Battle"
+enemy_ids = ["goblin", "goblin", "goblin", "goblin_archer"]
+on_victory_flag = "camp_guards_defeated"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CampEntryTrigger"]
+shape = SubResource("RectangleShape2D_camp")
+
+[node name="BossEncounterTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(1050, 650)
+script = ExtResource("2_trigger")
+trigger_id = "goblin_boss_encounter"
+one_shot = true
+required_flags = ["camp_guards_defeated"]
+event_type = "Dialogue"
+dialogue_path = "res://resources/dialogues/chapter1/boss_encounter.tres"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/BossEncounterTrigger"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="BossBattleTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(1200, 650)
+script = ExtResource("2_trigger")
+trigger_id = "goblin_boss_battle"
+one_shot = true
+required_flags = ["trigger_goblin_boss_encounter"]
+event_type = "Battle"
+enemy_ids = ["goblin_chief"]
+boss_battle = true
+on_victory_flag = "goblin_boss_defeated"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/BossBattleTrigger"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="VictoryTrigger" type="Area2D" parent="Triggers"]
+position = Vector2(1200, 650)
+script = ExtResource("2_trigger")
+trigger_id = "goblin_boss_victory"
+one_shot = true
+required_flags = ["goblin_boss_defeated"]
+event_type = "Dialogue"
+dialogue_path = "res://resources/dialogues/chapter1/boss_victory.tres"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/VictoryTrigger"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="MapNameLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 50.0
+text = "고블린 캠프 - 보스전"
+
+[node name="BossWarning" type="Label" parent="UI"]
+offset_left = 600.0
+offset_top = 100.0
+offset_right = 1200.0
+offset_bottom = 150.0
+text = ""
+horizontal_alignment = 1

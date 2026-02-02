@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "demon"
+display_name = "Demon"
+description = "A fearsome demon from the underworld"
+enemy_type = 1
+base_hp = 120
+base_mp = 30
+base_atk = 15
+base_def = 8
+base_spd = 80
+base_lck = 5
+attack_range = 50.0
+detection_range = 180.0
+ai_tick_interval = 0.35
+exp_reward = 35
+gold_reward = 25
+drop_table = []
+hp_per_level = 15
+atk_per_level = 2
+def_per_level = 1

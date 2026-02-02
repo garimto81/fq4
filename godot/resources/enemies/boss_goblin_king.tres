@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "boss_goblin_king"
+display_name = "Goblin King"
+description = "The king of all goblins"
+enemy_type = 2
+base_hp = 300
+base_mp = 50
+base_atk = 25
+base_def = 10
+base_spd = 60
+base_lck = 8
+attack_range = 60.0
+detection_range = 250.0
+ai_tick_interval = 0.3
+exp_reward = 100
+gold_reward = 200
+drop_table = []
+hp_per_level = 30
+atk_per_level = 4
+def_per_level = 2

@@ -1,0 +1,100 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "oasis_rest"
+title = "오아시스 휴식"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "신기루가 아니었다! 푸르른 야자수와 맑은 물이 있는 오아시스. 일행은 안도의 한숨을 내쉬었다.",
+"next": "alein_relief"
+}, {
+"id": "alein_relief",
+"speaker": "알레인",
+"portrait": "",
+"text": "물이다! 드디어... (물을 마신다) 아, 살 것 같아요!",
+"next": "taro_rest"
+}, {
+"id": "taro_rest",
+"speaker": "타로",
+"portrait": "",
+"text": "여기서 잠깐 쉬어가자. 물도 보충하고.",
+"next": "ares_pensive"
+}, {
+"id": "ares_pensive",
+"speaker": "아레스",
+"portrait": "",
+"text": "(물가에 앉아 생각에 잠긴다) ...",
+"next": "alein_concern"
+}, {
+"id": "alein_concern",
+"speaker": "알레인",
+"portrait": "",
+"text": "아레스, 무슨 생각을 그렇게 해요?",
+"next": "ares_worry"
+}, {
+"id": "ares_worry",
+"speaker": "아레스",
+"portrait": "",
+"text": "바르시아... 그가 왜 이런 짓을 하는지 아직도 이해가 안 돼. 우리는 동료였잖아.",
+"next": "taro_advice"
+}, {
+"id": "taro_advice",
+"speaker": "타로",
+"portrait": "",
+"text": "동료였기에 더 아픈 거겠지. 하지만 지금은 그를 막는 게 우선이야.",
+"next": "ares_resolve"
+}, {
+"id": "ares_resolve",
+"speaker": "아레스",
+"portrait": "",
+"text": "그래... 맞아. 감상에 빠질 시간은 없지.",
+"next": "alein_plan"
+}, {
+"id": "alein_plan",
+"speaker": "알레인",
+"portrait": "",
+"text": "앞으로 어떻게 할 거예요? 상인이 말한 유적으로 바로 갈 건가요?",
+"choices": [{
+"text": "바로 유적으로 향한다",
+"next": "choice_ruins"
+}, {
+"text": "더 정보를 모은다",
+"next": "choice_gather"
+}, {
+"text": "충분히 휴식한다",
+"next": "choice_fullrest"
+}]
+}, {
+"id": "choice_ruins",
+"speaker": "아레스",
+"portrait": "",
+"text": "시간을 끌 수 없어. 바로 유적으로 가자.",
+"event": "set_flag:oasis_direct_ruins",
+"next": "depart"
+}, {
+"id": "choice_gather",
+"speaker": "타로",
+"portrait": "",
+"text": "좋아, 신중한 게 낫지. 주변을 탐색해서 정보를 더 모으자.",
+"event": "set_flag:oasis_gather_info",
+"next": "depart"
+}, {
+"id": "choice_fullrest",
+"speaker": "알레인",
+"portrait": "",
+"text": "네, 무리하면 안 돼요. 충분히 쉬었다가 가요.",
+"event": "restore_party_full",
+"next": "depart"
+}, {
+"id": "depart",
+"speaker": "나레이터",
+"portrait": "",
+"text": "일행은 오아시스를 떠나 다시 사막으로 나아갔다.",
+"next": ""
+}]

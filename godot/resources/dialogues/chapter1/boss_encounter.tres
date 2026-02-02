@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "goblin_boss_encounter"
+title = "고블린 족장 조우"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "고블린 캠프 깊숙한 곳, 거대한 천막 앞에 이상하게 큰 고블린이 서 있다.",
+"next": "observe"
+}, {
+"id": "observe",
+"speaker": "주인공",
+"portrait": "",
+"text": "저건... 일반 고블린이 아니야. 저 크기는...",
+"next": "boss_appear"
+}, {
+"id": "boss_appear",
+"speaker": "고블린 족장",
+"portrait": "",
+"text": "크카카카! 인간 새끼들이 여기까지 찾아왔군!",
+"next": "boss_2"
+}, {
+"id": "boss_2",
+"speaker": "고블린 족장",
+"portrait": "",
+"text": "우리 형제들을 많이도 죽였어... 그 대가를 치르게 해주마!",
+"next": "ally_1"
+}, {
+"id": "ally_1",
+"speaker": "동료",
+"portrait": "",
+"text": "조심해! 저놈은 다른 고블린들과 차원이 달라!",
+"next": "hero_response"
+}, {
+"id": "hero_response",
+"speaker": "주인공",
+"portrait": "",
+"text": "...",
+"choices": [{
+"text": "두려움을 이기고 검을 든다",
+"next": "choice_brave"
+}, {
+"text": "동료들에게 전략을 제안한다",
+"next": "choice_strategy"
+}]
+}, {
+"id": "choice_brave",
+"speaker": "주인공",
+"portrait": "",
+"text": "이 녀석을 쓰러뜨리면 침공을 막을 수 있어... 간다!",
+"event": "set_flag:boss_choice_brave",
+"next": "battle_start"
+}, {
+"id": "choice_strategy",
+"speaker": "주인공",
+"portrait": "",
+"text": "저놈의 움직임은 느려. 주위를 포위하면서 공격하자.",
+"event": "set_flag:boss_choice_strategy",
+"next": "ally_strategy"
+}, {
+"id": "ally_strategy",
+"speaker": "동료",
+"portrait": "",
+"text": "좋아! 네 말대로 해보자!",
+"next": "battle_start"
+}, {
+"id": "battle_start",
+"speaker": "시스템",
+"portrait": "",
+"text": "[보스전 시작] 고블린 족장과의 전투가 시작됩니다!",
+"event": "start_battle:goblin_chief",
+"next": ""
+}]

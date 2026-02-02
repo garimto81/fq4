@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bandit"
+display_name = "Bandit"
+description = "A ruthless outlaw with combat experience"
+enemy_type = 0
+base_hp = 60
+base_mp = 0
+base_atk = 8
+base_def = 4
+base_spd = 85
+base_lck = 10
+attack_range = 50.0
+detection_range = 180.0
+ai_tick_interval = 0.4
+exp_reward = 15
+gold_reward = 12
+drop_table = []
+hp_per_level = 12
+atk_per_level = 2
+def_per_level = 1

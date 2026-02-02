@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "taro_intro"
+title = "Taro Introduction"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "???",
+"text": "HEY! You there! Watch out behind you!",
+"next": "node_1"
+}, {
+"id": "node_1",
+"speaker": "Ares",
+"text": "What?!",
+"next": "rescue"
+}, {
+"id": "rescue",
+"speaker": "???",
+"text": "HYAAAH! *Thwack!* Take that, you ugly greenskin!",
+"next": "rescue_2"
+}, {
+"id": "rescue_2",
+"speaker": "Taro",
+"text": "Phew! That was close! Name's Taro, wandering warrior and goblin-basher!",
+"next": "introduce"
+}, {
+"id": "introduce",
+"speaker": "Ares",
+"text": "Thanks for the save. I'm Ares.",
+"next": "introduce_2"
+}, {
+"id": "introduce_2",
+"speaker": "Alein",
+"text": "And I'm Alein. Are you hunting goblins too?",
+"next": "taro_explanation"
+}, {
+"id": "taro_explanation",
+"speaker": "Taro",
+"text": "Hunting? More like revenge! Those green pests ransacked my village!",
+"next": "taro_explanation_2"
+}, {
+"id": "taro_explanation_2",
+"speaker": "Taro",
+"text": "I've been tracking their war band for days. Looks like you're after them too?",
+"choices": [
+{"text": "Join us. We're stronger together.", "next": "join_accept"},
+{"text": "We can handle this ourselves.", "next": "join_refuse"}
+]
+}, {
+"id": "join_accept",
+"speaker": "Taro",
+"text": "Now that's what I like to hear! Let's crush those goblins!",
+"next": "join_complete"
+}, {
+"id": "join_refuse",
+"speaker": "Taro",
+"text": "Aw, come on! You need a tank, and I need backup! Win-win!",
+"next": "join_refuse_2"
+}, {
+"id": "join_refuse_2",
+"speaker": "Alein",
+"text": "Ares, we could use his help. He's clearly experienced.",
+"next": "join_accept"
+}, {
+"id": "join_complete",
+"speaker": "Taro",
+"text": "Alright! I'll take the front line. You can count on me!",
+"next": "party_banter"
+}, {
+"id": "party_banter",
+"speaker": "Alein",
+"text": "A tank, a healer, and a leader. We're actually starting to look like a proper party.",
+"next": "end"
+}, {
+"id": "end",
+"speaker": "Taro",
+"text": "Then let's show those goblins what we're made of!",
+"event": "add_party_member:taro"
+}]

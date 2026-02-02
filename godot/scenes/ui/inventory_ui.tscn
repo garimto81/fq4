@@ -1,0 +1,132 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvn4g8x2qk5jy"]
+
+[ext_resource type="Script" path="res://scripts/ui/inventory_ui.gd" id="1_inventory_ui"]
+
+[node name="InventoryUI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_inventory_ui")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Container/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Container/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Container/VBox/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "X"
+
+[node name="Content" type="HBoxContainer" parent="Container/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemScroll" type="ScrollContainer" parent="Container/VBox/Content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemGrid" type="GridContainer" parent="Container/VBox/Content/ItemScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+
+[node name="DetailPanel" type="Panel" parent="Container/VBox/Content"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Container/VBox/Content/DetailPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ItemIcon" type="TextureRect" parent="Container/VBox/Content/DetailPanel/VBox"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemName" type="Label" parent="Container/VBox/Content/DetailPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Item Name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="Container/VBox/Content/DetailPanel/VBox"]
+layout_mode = 2
+
+[node name="ItemDesc" type="RichTextLabel" parent="Container/VBox/Content/DetailPanel/VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Item description goes here."
+fit_content = true
+
+[node name="Buttons" type="HBoxContainer" parent="Container/VBox/Content/DetailPanel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="UseButton" type="Button" parent="Container/VBox/Content/DetailPanel/VBox/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Use"
+
+[node name="DropButton" type="Button" parent="Container/VBox/Content/DetailPanel/VBox/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Drop"
+
+[node name="Footer" type="HBoxContainer" parent="Container/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="Container/VBox/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gold: 0"
+vertical_alignment = 1

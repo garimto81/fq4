@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 3
+chapter_name = "첫 번째 보스"
+chapter_subtitle = "어둠의 기사"
+description = "동료들과 함께 강해진 용사 일행은 마물 군단의 수장 중 하나인 어둠의 기사와 대면한다.
+왕국의 운명을 건 첫 번째 대결이 시작된다."
+maps = ["res://scenes/maps/chapter3/dark_forest_entrance.tscn", "res://scenes/maps/chapter3/corrupted_shrine.tscn", "res://scenes/maps/chapter3/dark_knight_arena.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter3/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter3/chapter3_clear.tres"
+clear_flags = ["first_boss_defeated"]
+boss_map = "res://scenes/maps/chapter3/dark_knight_arena.tscn"
+boss_enemy_id = "dark_knight"
+bgm_path = "res://assets/audio/bgm/chapter3_theme.ogg"

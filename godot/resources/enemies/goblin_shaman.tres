@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "goblin_shaman"
+display_name = "Goblin Shaman"
+description = "A magic-wielding goblin with weak defense"
+enemy_type = 0
+base_hp = 30
+base_mp = 40
+base_atk = 5
+base_def = 2
+base_spd = 75
+base_lck = 5
+attack_range = 100.0
+detection_range = 200.0
+ai_tick_interval = 0.5
+exp_reward = 18
+gold_reward = 10
+drop_table = []
+hp_per_level = 6
+atk_per_level = 3
+def_per_level = 1

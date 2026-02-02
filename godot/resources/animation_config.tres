@@ -1,0 +1,114 @@
+[gd_resource type="Resource" script_class="AnimationConfig" load_steps=2 format=3 uid="uid://d5p8q9n2kvwx7"]
+
+[ext_resource type="Script" path="res://scripts/resources/animation_config.gd" id="1_config"]
+
+[resource]
+script = ExtResource("1_config")
+character_animations = {
+	"idle": {
+		"frames": 4,
+		"fps": 4,
+		"loop": true,
+		"frame_size": Vector2i(32, 32)
+	},
+	"walk": {
+		"frames": 8,
+		"fps": 10,
+		"loop": true,
+		"frame_size": Vector2i(32, 32)
+	},
+	"run": {
+		"frames": 8,
+		"fps": 12,
+		"loop": true,
+		"frame_size": Vector2i(32, 32)
+	},
+	"attack": {
+		"frames": 6,
+		"fps": 12,
+		"loop": false,
+		"frame_size": Vector2i(32, 32)
+	},
+	"cast": {
+		"frames": 5,
+		"fps": 10,
+		"loop": false,
+		"frame_size": Vector2i(32, 32)
+	},
+	"hurt": {
+		"frames": 2,
+		"fps": 8,
+		"loop": false,
+		"frame_size": Vector2i(32, 32)
+	},
+	"death": {
+		"frames": 4,
+		"fps": 6,
+		"loop": false,
+		"frame_size": Vector2i(32, 32)
+	},
+	"defend": {
+		"frames": 2,
+		"fps": 4,
+		"loop": true,
+		"frame_size": Vector2i(32, 32)
+	}
+}
+effect_animations = {
+	"slash": {
+		"frames": 4,
+		"fps": 15,
+		"loop": false,
+		"frame_size": Vector2i(48, 48)
+	},
+	"fireball": {
+		"frames": 6,
+		"fps": 12,
+		"loop": false,
+		"frame_size": Vector2i(64, 64)
+	},
+	"explosion": {
+		"frames": 8,
+		"fps": 15,
+		"loop": false,
+		"frame_size": Vector2i(64, 64)
+	},
+	"heal": {
+		"frames": 5,
+		"fps": 10,
+		"loop": false,
+		"frame_size": Vector2i(32, 32)
+	},
+	"buff": {
+		"frames": 4,
+		"fps": 8,
+		"loop": true,
+		"frame_size": Vector2i(32, 32)
+	},
+	"lightning": {
+		"frames": 3,
+		"fps": 20,
+		"loop": false,
+		"frame_size": Vector2i(32, 64)
+	}
+}
+direction_layout = {
+	"down": 0,
+	"down_right": 1,
+	"right": 2,
+	"up_right": 3,
+	"up": 4,
+	"up_left": 5,
+	"left": 6,
+	"down_left": 7
+}
+animation_priority = {
+	"death": 100,
+	"hurt": 90,
+	"attack": 80,
+	"cast": 75,
+	"defend": 70,
+	"run": 60,
+	"walk": 50,
+	"idle": 0
+}

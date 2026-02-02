@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "first_battle"
+title = "First Battle Tutorial"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "Alein",
+"text": "Wait! Goblins ahead. Let me explain the basics before we engage.",
+"next": "tutorial_1"
+}, {
+"id": "tutorial_1",
+"speaker": "Alein",
+"text": "Use WASD to move your character. Your allies will follow you automatically.",
+"next": "tutorial_2"
+}, {
+"id": "tutorial_2",
+"speaker": "Alein",
+"text": "This is called the 'Gocha-Kyara' system. They'll fight and retreat on their own!",
+"next": "tutorial_3"
+}, {
+"id": "tutorial_3",
+"speaker": "Alein",
+"text": "Press SPACE to attack when near an enemy. Right-click to command movement.",
+"next": "tutorial_4"
+}, {
+"id": "tutorial_4",
+"speaker": "Alein",
+"text": "Watch your fatigue! If you push too hard, you'll collapse. Rest when tired.",
+"next": "tutorial_5"
+}, {
+"id": "tutorial_5",
+"speaker": "Ares",
+"text": "Got it. Stay close, avoid exhaustion, and let my allies support me.",
+"choices": [
+{"text": "I'm ready!", "next": "ready"},
+{"text": "Wait, explain again...", "next": "tutorial_1"}
+]
+}, {
+"id": "ready",
+"speaker": "Alein",
+"text": "Good! Remember, I'm here to heal you. Just focus on the fight!",
+"next": "end",
+"event": "set_flag:tutorial_complete"
+}, {
+"id": "end",
+"speaker": "Ares",
+"text": "Let's do this!",
+"event": "start_battle:goblin_scouts"
+}]

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/levels/level_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+base_exp = 100
+exp_growth_rate = 1.2
+hp_growth = 15
+mp_growth = 5
+atk_growth = 2
+def_growth = 1
+spd_growth = 1
+lck_growth = 1

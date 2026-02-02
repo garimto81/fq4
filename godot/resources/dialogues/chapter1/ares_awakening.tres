@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "ares_awakening"
+title = "Ares Awakening"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "???",
+"text": "...Ugh... My head...",
+"next": "node_1"
+}, {
+"id": "node_1",
+"speaker": "???",
+"text": "You're awake! Thank the gods!",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "Ares",
+"text": "Who... who are you?",
+"next": "node_3"
+}, {
+"id": "node_3",
+"speaker": "Alein",
+"text": "I'm Alein, a wandering cleric. I found you collapsed on the battlefield.",
+"choices": [
+{"text": "Battlefield? What happened?", "next": "explain_battle"},
+{"text": "Where am I?", "next": "explain_location"}
+]
+}, {
+"id": "explain_battle",
+"speaker": "Alein",
+"text": "There was a fierce battle here. Goblins attacked the nearby village.",
+"next": "explain_battle_2"
+}, {
+"id": "explain_battle_2",
+"speaker": "Alein",
+"text": "By the time I arrived, most had fled. But you... you were still breathing.",
+"next": "join_party"
+}, {
+"id": "explain_location",
+"speaker": "Alein",
+"text": "We're on the outskirts of Levell Village. It's been overrun by monsters.",
+"next": "explain_location_2"
+}, {
+"id": "explain_location_2",
+"speaker": "Alein",
+"text": "The villagers have taken refuge in the temple, but we need to drive the monsters back.",
+"next": "join_party"
+}, {
+"id": "join_party",
+"speaker": "Ares",
+"text": "I... I remember now. I have to stop them!",
+"next": "join_party_2"
+}, {
+"id": "join_party_2",
+"speaker": "Alein",
+"text": "Then let me help you. My healing magic isn't much, but together we stand a chance.",
+"next": "tutorial_hint"
+}, {
+"id": "tutorial_hint",
+"speaker": "Alein",
+"text": "Stay close to me. I'll follow your lead and support you in battle.",
+"next": "end",
+"event": "set_flag:tutorial_started"
+}, {
+"id": "end",
+"speaker": "Ares",
+"text": "Let's move out!",
+"event": "set_flag:ares_awakening_complete"
+}]

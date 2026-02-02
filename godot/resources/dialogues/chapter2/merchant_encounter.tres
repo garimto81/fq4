@@ -1,0 +1,100 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "merchant_encounter"
+title = "떠돌이 상인 만남"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "사막을 걷던 중, 낙타를 끌고 가는 수상한 인물이 보인다.",
+"next": "merchant_greet"
+}, {
+"id": "merchant_greet",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "오호, 이런 곳에서 여행자들을 만나다니! 안녕하시오, 나는 사막을 떠도는 상인이라오.",
+"next": "ares_cautious"
+}, {
+"id": "ares_cautious",
+"speaker": "아레스",
+"portrait": "",
+"text": "(경계하며) 당신은 누구죠? 이런 곳에서 뭘 하는 거요?",
+"next": "merchant_explain"
+}, {
+"id": "merchant_explain",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "헤헤, 의심스럽게 보이는 건 이해하오. 하지만 난 그저 물건을 팔고 정보를 교환하는 상인일 뿐이오.",
+"next": "taro_question"
+}, {
+"id": "taro_question",
+"speaker": "타로",
+"portrait": "",
+"text": "혹시... 이 근처에서 수상한 사람을 본 적 있소? 검은 옷을 입은 마법사 같은...",
+"next": "merchant_info"
+}, {
+"id": "merchant_info",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "아하, 찾는 사람이 있군요! 음... 정보는 공짜가 아니지만, 당신들은 급해 보이니...",
+"next": "merchant_offer"
+}, {
+"id": "merchant_offer",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "거래를 하시오. 물건을 사주면 정보를 주지. 아니면 그냥 정보만 살 수도 있소.",
+"choices": [{
+"text": "물건을 산다 (50 Gold)",
+"next": "choice_buy"
+}, {
+"text": "정보만 산다 (20 Gold)",
+"next": "choice_info"
+}, {
+"text": "거절한다",
+"next": "choice_refuse"
+}]
+}, {
+"id": "choice_buy",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "현명한 선택이오! 자, 여기 물약과 함께 정보를 드리지.",
+"event": "buy_merchant_goods:50",
+"next": "merchant_reveal"
+}, {
+"id": "choice_info",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "좋아요, 정보만 원한다면 그것도 괜찮소.",
+"event": "buy_merchant_info:20",
+"next": "merchant_reveal"
+}, {
+"id": "choice_refuse",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "흠, 그렇다면 할 수 없지. 행운을 빌겠소!",
+"next": "merchant_leave"
+}, {
+"id": "merchant_reveal",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "그 검은 마법사는 북동쪽 유적으로 향했소. 하지만 조심하시오, 그곳엔 산적들이 득실거리지.",
+"event": "set_flag:merchant_info_received",
+"next": "ares_thanks"
+}, {
+"id": "ares_thanks",
+"speaker": "아레스",
+"portrait": "",
+"text": "고마워요. 도움이 됐소.",
+"next": "merchant_leave"
+}, {
+"id": "merchant_leave",
+"speaker": "떠돌이 상인",
+"portrait": "",
+"text": "천만에요! 또 만날 날이 있기를 바라오!",
+"next": ""
+}]
