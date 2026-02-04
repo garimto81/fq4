@@ -261,3 +261,56 @@ func start_battle() -> void:
 		current_squad_id = first_squad_id
 		if not squads[first_squad_id].is_empty():
 			_set_controlled_unit(squads[first_squad_id][0])
+
+# ========== 대형 및 명령 시스템 ==========
+
+## 현재 부대 대형 변경
+func set_squad_formation(squad_id: int, formation: int) -> void:
+	if not squads.has(squad_id):
+		return
+
+	for unit in squads[squad_id]:
+		if unit.has_method("set_formation"):
+			unit.set_formation(formation)
+
+## 현재 부대에 명령 내리기
+func issue_squad_command(squad_id: int, command: int) -> void:
+	if not squads.has(squad_id):
+		return
+
+	for unit in squads[squad_id]:
+		if unit.has_method("receive_command"):
+			unit.receive_command(command)
+
+## 현재 조작 중인 부대 대형 변경 (단축키용)
+func set_current_squad_formation(formation: int) -> void:
+	set_squad_formation(current_squad_id, formation)
+
+## 현재 조작 중인 부대에 명령 (단축키용)
+func issue_current_squad_command(command: int) -> void:
+	issue_squad_command(current_squad_id, command)
+
+## 전 부대 집합 명령
+func command_all_gather() -> void:
+	for squad_id in squads:
+		issue_squad_command(squad_id, 1)  # SquadCommand.GATHER
+
+## 전 부대 분산 명령
+func command_all_scatter() -> void:
+	for squad_id in squads:
+		issue_squad_command(squad_id, 2)  # SquadCommand.SCATTER
+
+## 전 부대 공격 명령
+func command_all_attack() -> void:
+	for squad_id in squads:
+		issue_squad_command(squad_id, 3)  # SquadCommand.ATTACK_ALL
+
+## 전 부대 방어 명령
+func command_all_defend() -> void:
+	for squad_id in squads:
+		issue_squad_command(squad_id, 4)  # SquadCommand.DEFEND_ALL
+
+## 전 부대 후퇴 명령
+func command_all_retreat() -> void:
+	for squad_id in squads:
+		issue_squad_command(squad_id, 5)  # SquadCommand.RETREAT_ALL

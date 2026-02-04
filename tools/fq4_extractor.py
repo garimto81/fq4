@@ -80,179 +80,213 @@ class FQ4PaletteParser:
 
 
 class RGBEDecoder:
-    """Decoder for RGBE compressed plane files"""
+    """Decoder for RGBE compressed plane files (First Queen 4 format)
+
+    File Format Analysis:
+    - Type 9 (B_, G_): 6-byte header + 1024-byte flag table + compressed data
+    - Type 7 (R_, E_): RLE compressed with different header structure
+
+    Header Structure (Type 9):
+        00-01: Compression type (0x0009)
+        02-03: Unknown (0x0000)
+        04-05: Flag table size (0x0400 = 1024)
+        06+:   Flag table followed by compressed data
+
+    Header Structure (Type 7):
+        00-01: Compression type (0x0007)
+        02+:   RLE compressed data
+    """
 
     def __init__(self, base_path: str):
-        """
-        Initialize decoder with base path (e.g., "FQOP_01")
-
-        Args:
-            base_path: Base filename without extension
-        """
+        """Initialize decoder with base path (e.g., "FQOP_01")"""
         self.base_path = Path(base_path)
-        self.width = 0
-        self.height = 0
-        self.data = None
+        self.width = 320   # Standard VGA width
+        self.height = 200  # Standard VGA height
+        self.plane_size = self.width * self.height // 8  # 8000 bytes per plane
 
-    def parse_header(self, filepath: Path) -> Tuple[int, int]:
+    def decompress_type7_rle(self, data: bytes, skip: int = 2) -> bytes:
         """
-        Parse RGBE file header
+        Decompress Type 7 RLE format (used by R_ and E_ files)
 
-        Header structure (first 16 bytes):
-        00-01: Unknown (0x0009)
-        04-05: Size/dimension? (0x0400 = 1024)
-        06-07: Magic/checksum? (0x4711)
-
-        Returns:
-            (width, height) tuple
-        """
-        with open(filepath, 'rb') as f:
-            header = f.read(16)
-
-        if len(header) < 16:
-            raise ValueError(f"Header too short: {len(header)} bytes")
-
-        # Parse header fields
-        field1 = struct.unpack('<H', header[0:2])[0]  # 0x0009
-        field2 = struct.unpack('<H', header[4:6])[0]  # 0x0400
-        magic = struct.unpack('<H', header[6:8])[0]   # 0x4711
-
-        print(f"Header: field1=0x{field1:04X}, field2=0x{field2:04X}, magic=0x{magic:04X}")
-
-        # Try to deduce dimensions
-        # field2 = 0x0400 = 1024 could be total pixels / 256 = 4
-        # Common DOS game resolutions: 320x200, 640x480, etc.
-        # For now, try 320x200 (standard VGA)
-        self.width = 320
-        self.height = 200
-
-        return self.width, self.height
-
-    def decompress_rle(self, data: bytes) -> bytes:
-        """
-        Attempt RLE decompression (common in DOS games)
-
-        Common RLE format:
-        - If byte >= 0x80: Repeat next byte (count = byte - 0x80)
-        - If byte < 0x80: Copy next 'byte' bytes literally
+        Format:
+        - control >= 0x80: Repeat next byte (control - 0x7F) times
+        - control < 0x80: Copy (control + 1) literal bytes
         """
         result = bytearray()
-        i = 0
+        i = skip  # Skip header bytes
 
-        while i < len(data):
+        while i < len(data) and len(result) < self.plane_size:
             control = data[i]
             i += 1
 
             if control >= 0x80:
-                # RLE run
-                count = control - 0x80
+                count = control - 0x7F
                 if i < len(data):
                     value = data[i]
                     i += 1
                     result.extend([value] * count)
             else:
-                # Literal run
-                count = control
+                count = control + 1
                 if i + count <= len(data):
                     result.extend(data[i:i+count])
                     i += count
+                else:
+                    break
 
         return bytes(result)
 
-    def decompress_lzss(self, data: bytes) -> bytes:
+    def decompress_type9(self, data: bytes) -> bytes:
         """
-        Attempt LZSS decompression (simple version)
+        Decompress Type 9 format (used by B_ and G_ files)
+
+        Structure:
+        - 6-byte header
+        - 1024-byte flag table
+        - Compressed data
+
+        The flag table contains word entries:
+        - 0x00XX: Literal byte index
+        - 0xFFXX: Special command (repeat/run)
         """
-        # Simplified LZSS - this is a placeholder
-        # Real LZSS would need proper implementation
-        return data
+        if len(data) < 6:
+            return data
+
+        # Parse header
+        table_size = struct.unpack('<H', data[4:6])[0]
+
+        # Skip header and flag table
+        data_start = 6 + table_size
+        if data_start >= len(data):
+            return data
+
+        compressed = data[data_start:]
+
+        # Try direct RLE on the compressed data
+        result = bytearray()
+        i = 0
+
+        while i < len(compressed) and len(result) < self.plane_size:
+            control = compressed[i]
+            i += 1
+
+            if control >= 0x80:
+                count = control - 0x7F
+                if i < len(compressed):
+                    value = compressed[i]
+                    i += 1
+                    result.extend([value] * count)
+            else:
+                count = control + 1
+                if i + count <= len(compressed):
+                    result.extend(compressed[i:i+count])
+                    i += count
+                else:
+                    break
+
+        return bytes(result)
+
+    def load_plane(self, filepath: Path) -> Optional[bytes]:
+        """Load and decompress a single plane file"""
+        if not filepath.exists():
+            print(f"Warning: Plane file not found: {filepath}")
+            return None
+
+        with open(filepath, 'rb') as f:
+            data = f.read()
+
+        if len(data) < 2:
+            return None
+
+        comp_type = struct.unpack('<H', data[0:2])[0]
+        print(f"  {filepath.name}: {len(data)} bytes, type={comp_type}")
+
+        if comp_type == 9:
+            decompressed = self.decompress_type9(data)
+        elif comp_type == 7:
+            decompressed = self.decompress_type7_rle(data, skip=2)
+        else:
+            # Unknown type, try as raw planar data
+            decompressed = data[2:]
+
+        print(f"    Decompressed: {len(decompressed)} bytes (expected: {self.plane_size})")
+
+        # Pad or truncate to expected size
+        if len(decompressed) < self.plane_size:
+            decompressed = decompressed + bytes(self.plane_size - len(decompressed))
+        elif len(decompressed) > self.plane_size:
+            decompressed = decompressed[:self.plane_size]
+
+        return decompressed
 
     def load_planes(self) -> Optional[bytes]:
-        """
-        Load and decompress all 4 RGBE plane files
-
-        Returns:
-            Decompressed indexed image data or None
-        """
+        """Load and decompress all 4 RGBE plane files"""
+        # BGRE order for proper 4-bit pixel assembly
+        plane_extensions = ['B_', 'G_', 'R_', 'E_']
         plane_files = [
-            self.base_path.parent / f"{self.base_path.stem}.B_",
-            self.base_path.parent / f"{self.base_path.stem}.R_",
-            self.base_path.parent / f"{self.base_path.stem}.G_",
-            self.base_path.parent / f"{self.base_path.stem}.E_",
+            self.base_path.parent / f"{self.base_path.stem}.{ext}"
+            for ext in plane_extensions
         ]
 
+        print(f"Loading planes for {self.base_path.stem}:")
         planes = []
         for pf in plane_files:
-            if not pf.exists():
-                print(f"Warning: Plane file not found: {pf}")
+            plane = self.load_plane(pf)
+            if plane is None:
                 return None
-
-            with open(pf, 'rb') as f:
-                # Skip header (16 bytes)
-                f.seek(16)
-                plane_data = f.read()
-
-            print(f"Loaded {pf.name}: {len(plane_data)} bytes")
-
-            # Try decompression methods
-            # Method 1: Try as raw data first
-            decompressed = plane_data
-
-            # Method 2: Try RLE decompression
-            try:
-                rle_result = self.decompress_rle(plane_data)
-                if len(rle_result) == self.width * self.height:
-                    decompressed = rle_result
-                    print(f"  RLE decompression successful: {len(decompressed)} bytes")
-            except Exception as e:
-                print(f"  RLE decompression failed: {e}")
-
-            planes.append(decompressed)
-
-        # Parse header from first plane
-        self.parse_header(plane_files[0])
+            planes.append(plane)
 
         # Combine planes to create indexed image
-        # RGBE typically means 4 bitplanes that combine to create 4-bit (16 color) pixels
-        if len(planes) == 4:
-            return self.combine_planes(planes)
-
-        return None
+        return self.combine_planes(planes)
 
     def combine_planes(self, planes: List[bytes]) -> bytes:
         """
         Combine 4 bitplanes into indexed color image
 
-        Each plane contributes one bit per pixel:
-        - E plane: bit 0 (LSB)
-        - G plane: bit 1
-        - R plane: bit 2
+        VGA planar format: each plane byte contains 8 horizontal pixels
+        Planes are combined bit-by-bit:
         - B plane: bit 3 (MSB)
+        - G plane: bit 2
+        - R plane: bit 1
+        - E plane: bit 0 (LSB)
 
         Result: 4-bit pixel values (0-15)
         """
-        expected_size = self.width * self.height
+        total_pixels = self.width * self.height
+        result = bytearray(total_pixels)
 
-        # Take minimum size across all planes
-        min_size = min(len(p) for p in planes)
-        actual_pixels = min(min_size, expected_size)
+        # Each byte in plane data represents 8 horizontal pixels
+        bytes_per_row = self.width // 8  # 40 bytes per row
 
-        result = bytearray(actual_pixels)
+        for y in range(self.height):
+            for x_byte in range(bytes_per_row):
+                byte_offset = y * bytes_per_row + x_byte
 
-        for i in range(actual_pixels):
-            # Get bit from each plane
-            # Assume planar format: each byte contains 8 pixels
-            byte_idx = i // 8
-            bit_idx = 7 - (i % 8)
+                if byte_offset >= len(planes[0]):
+                    continue
 
-            pixel = 0
-            for plane_num, plane in enumerate(planes):
-                if byte_idx < len(plane):
-                    byte_val = plane[byte_idx]
-                    bit = (byte_val >> bit_idx) & 1
-                    pixel |= (bit << plane_num)
+                # Get bytes from each plane
+                b_byte = planes[0][byte_offset] if byte_offset < len(planes[0]) else 0
+                g_byte = planes[1][byte_offset] if byte_offset < len(planes[1]) else 0
+                r_byte = planes[2][byte_offset] if byte_offset < len(planes[2]) else 0
+                e_byte = planes[3][byte_offset] if byte_offset < len(planes[3]) else 0
 
-            result[i] = pixel
+                # Extract 8 pixels from these bytes
+                for bit in range(8):
+                    pixel_x = x_byte * 8 + (7 - bit)  # MSB first
+                    pixel_idx = y * self.width + pixel_x
+
+                    if pixel_idx >= total_pixels:
+                        continue
+
+                    # Combine bits from each plane
+                    b_bit = (b_byte >> bit) & 1
+                    g_bit = (g_byte >> bit) & 1
+                    r_bit = (r_byte >> bit) & 1
+                    e_bit = (e_byte >> bit) & 1
+
+                    # B=bit3, G=bit2, R=bit1, E=bit0
+                    pixel = (b_bit << 3) | (g_bit << 2) | (r_bit << 1) | e_bit
+                    result[pixel_idx] = pixel
 
         return bytes(result)
 

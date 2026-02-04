@@ -25,10 +25,31 @@ enum Personality {
 	BALANCED         # 균형: 상황에 따라 유연하게 대응
 }
 
+# 대형 시스템 (Gocha-Kyara)
+enum Formation {
+	V_SHAPE,         # V자 대형 (기본)
+	LINE,            # 일렬 대형
+	CIRCLE,          # 원형 대형
+	WEDGE,           # 쐐기 대형
+	SCATTERED        # 분산 대형
+}
+
+# 부대 명령 시스템
+enum SquadCommand {
+	NONE,            # 명령 없음
+	GATHER,          # 집합
+	SCATTER,         # 분산
+	ATTACK_ALL,      # 전원 공격
+	DEFEND_ALL,      # 전원 방어
+	RETREAT_ALL      # 전원 후퇴
+}
+
 @export var personality: Personality = Personality.BALANCED
 @export var is_player_controlled: bool = false  # 현재 플레이어가 조작 중인지
+@export var formation: Formation = Formation.V_SHAPE  # 현재 대형
 
 var ai_state: AIState = AIState.FOLLOW
+var current_command: SquadCommand = SquadCommand.NONE
 var leader = null  # Unit  # 따라갈 리더 유닛
 var squad_id: int = 0    # 소속 부대 ID
 var squad_position: int = 0  # 부대 내 위치 (전환용)
@@ -233,7 +254,22 @@ func _ai_follow() -> void:
 
 ## 부대 내 위치에 따른 오프셋 계산
 func _calculate_follow_offset() -> Vector2:
-	# 리더 뒤쪽에 V자 대형으로 배치
+	match formation:
+		Formation.V_SHAPE:
+			return _calculate_v_shape_offset()
+		Formation.LINE:
+			return _calculate_line_offset()
+		Formation.CIRCLE:
+			return _calculate_circle_offset()
+		Formation.WEDGE:
+			return _calculate_wedge_offset()
+		Formation.SCATTERED:
+			return _calculate_scattered_offset()
+		_:
+			return _calculate_v_shape_offset()
+
+## V자 대형 오프셋 (기본)
+func _calculate_v_shape_offset() -> Vector2:
 	var angle_offset = (squad_position - 2) * 0.5  # -1, -0.5, 0, 0.5, 1
 	var base_angle = PI * 0.75  # 리더 뒤쪽 (135도)
 	var angle = base_angle + angle_offset
@@ -243,13 +279,42 @@ func _calculate_follow_offset() -> Vector2:
 		sin(angle) * follow_distance * 0.6  # Y축 압축
 	)
 
-	# 부대원끼리 겹치지 않도록 분산
 	offset += Vector2(
 		(squad_position % 3 - 1) * follow_spread,
 		(squad_position / 3) * follow_spread
 	)
 
 	return offset
+
+## 일렬 대형 오프셋
+func _calculate_line_offset() -> Vector2:
+	var horizontal_offset = (squad_position - 2) * follow_spread * 1.5
+	return Vector2(horizontal_offset, follow_distance)
+
+## 원형 대형 오프셋
+func _calculate_circle_offset() -> Vector2:
+	var total_units = 5  # 기본 부대원 수
+	var angle = (2 * PI / total_units) * squad_position
+	return Vector2(
+		cos(angle) * follow_distance,
+		sin(angle) * follow_distance
+	)
+
+## 쐐기 대형 오프셋
+func _calculate_wedge_offset() -> Vector2:
+	var row = squad_position / 2
+	var col = squad_position % 2
+	var x_offset = (col * 2 - 1) * follow_spread * (row + 1) * 0.5
+	var y_offset = follow_distance + (row * follow_spread)
+	return Vector2(x_offset, y_offset)
+
+## 분산 대형 오프셋
+func _calculate_scattered_offset() -> Vector2:
+	# 시드 기반 의사난수로 분산 위치 결정
+	var seed_offset = squad_position * 137 + squad_id * 31
+	var angle = fmod(seed_offset * 0.618033988749, 1.0) * 2 * PI
+	var distance = follow_distance * (1.0 + fmod(seed_offset * 0.314159, 0.5))
+	return Vector2(cos(angle) * distance, sin(angle) * distance)
 
 ## 순찰 행동
 func _ai_patrol() -> void:
@@ -391,6 +456,62 @@ func _ai_rest() -> void:
 func move_to(target: Vector2) -> void:
 	if is_player_controlled:
 		_move_towards(target)
+
+## 대형 변경
+func set_formation(new_formation: Formation) -> void:
+	formation = new_formation
+
+## 부대 명령 수신
+func receive_command(command: SquadCommand) -> void:
+	current_command = command
+	match command:
+		SquadCommand.GATHER:
+			_execute_gather_command()
+		SquadCommand.SCATTER:
+			_execute_scatter_command()
+		SquadCommand.ATTACK_ALL:
+			_execute_attack_command()
+		SquadCommand.DEFEND_ALL:
+			_execute_defend_command()
+		SquadCommand.RETREAT_ALL:
+			_execute_retreat_command()
+
+## 집합 명령 실행
+func _execute_gather_command() -> void:
+	formation = Formation.CIRCLE
+	follow_distance = 40.0  # 더 가깝게 모임
+	if leader:
+		_change_ai_state(AIState.FOLLOW)
+
+## 분산 명령 실행
+func _execute_scatter_command() -> void:
+	formation = Formation.SCATTERED
+	follow_distance = 150.0  # 더 넓게 분산
+	if leader:
+		_change_ai_state(AIState.FOLLOW)
+
+## 전원 공격 명령 실행
+func _execute_attack_command() -> void:
+	target_enemy = _find_nearest_enemy()
+	if target_enemy:
+		_change_ai_state(AIState.CHASE)
+	else:
+		_change_ai_state(AIState.PATROL)
+
+## 전원 방어 명령 실행
+func _execute_defend_command() -> void:
+	formation = Formation.CIRCLE
+	follow_distance = 50.0
+	_change_ai_state(AIState.DEFEND)
+
+## 전원 후퇴 명령 실행
+func _execute_retreat_command() -> void:
+	_change_ai_state(AIState.RETREAT)
+
+## 명령 초기화
+func clear_command() -> void:
+	current_command = SquadCommand.NONE
+	follow_distance = 80.0  # 기본값 복원
 
 ## 목표 지점으로 이동
 func _move_towards(target: Vector2) -> void:

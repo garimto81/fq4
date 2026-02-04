@@ -1,0 +1,151 @@
+[gd_scene load_steps=4 format=3 uid="uid://corrupted_shrine_map"]
+
+[ext_resource type="Script" path="res://scripts/map/map_data.gd" id="1_mapdata"]
+[ext_resource type="Script" path="res://scripts/events/event_trigger.gd" id="2_trigger"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
+size = Vector2(100, 100)
+
+[node name="CorruptedShrine" type="Node2D"]
+
+[node name="MapData" type="Node" parent="."]
+script = ExtResource("1_mapdata")
+map_id = "corrupted_shrine"
+map_name = "오염된 사당"
+chapter = 3
+map_width = 1400
+map_height = 900
+map_type = "Dungeon"
+connections = {"exit_south": {"map": "res://scenes/maps/chapter3/dark_forest_entrance.tscn", "spawn": "from_shrine"}, "exit_north": {"map": "res://scenes/maps/chapter3/dark_knight_arena.tscn", "spawn": "from_shrine"}}
+entry_events = []
+
+[node name="Floor" type="ColorRect" parent="."]
+offset_right = 1400.0
+offset_bottom = 900.0
+color = Color(0.12, 0.1, 0.15, 1)
+
+[node name="Altar" type="ColorRect" parent="."]
+offset_left = 600.0
+offset_top = 200.0
+offset_right = 800.0
+offset_bottom = 350.0
+color = Color(0.25, 0.15, 0.3, 1)
+
+[node name="Pillars" type="Node2D" parent="."]
+
+[node name="Pillar1" type="ColorRect" parent="Pillars"]
+offset_left = 200.0
+offset_top = 250.0
+offset_right = 250.0
+offset_bottom = 450.0
+color = Color(0.2, 0.18, 0.22, 1)
+
+[node name="Pillar2" type="ColorRect" parent="Pillars"]
+offset_left = 1150.0
+offset_top = 250.0
+offset_right = 1200.0
+offset_bottom = 450.0
+color = Color(0.2, 0.18, 0.22, 1)
+
+[node name="Pillar3" type="ColorRect" parent="Pillars"]
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 450.0
+offset_bottom = 700.0
+color = Color(0.2, 0.18, 0.22, 1)
+
+[node name="Pillar4" type="ColorRect" parent="Pillars"]
+offset_left = 950.0
+offset_top = 500.0
+offset_right = 1000.0
+offset_bottom = 700.0
+color = Color(0.2, 0.18, 0.22, 1)
+
+[node name="CorruptedGlow" type="ColorRect" parent="."]
+offset_left = 500.0
+offset_top = 150.0
+offset_right = 900.0
+offset_bottom = 400.0
+color = Color(0.4, 0.1, 0.5, 0.3)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(700, 750)
+
+[node name="from_forest" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(700, 800)
+
+[node name="from_boss" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(700, 200)
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="GoblinShaman" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(700, 300)
+metadata/enemy_id = "goblin_shaman"
+
+[node name="Demon1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(350, 400)
+metadata/enemy_id = "demon"
+
+[node name="Demon2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(1050, 400)
+metadata/enemy_id = "demon"
+
+[node name="Skeleton1" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(500, 600)
+metadata/enemy_id = "skeleton"
+
+[node name="Skeleton2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(900, 600)
+metadata/enemy_id = "skeleton"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="ExitToForest" type="Area2D" parent="Triggers"]
+position = Vector2(700, 850)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_forest_from_shrine"
+one_shot = false
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter3/dark_forest_entrance.tscn"
+spawn_point = "from_shrine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToForest"]
+shape = SubResource("RectangleShape2D_area")
+
+[node name="ExitToBoss" type="Area2D" parent="Triggers"]
+position = Vector2(700, 100)
+script = ExtResource("2_trigger")
+trigger_id = "exit_to_boss_arena"
+one_shot = false
+required_flags = ["shrine_cleared"]
+event_type = "MapTransition"
+target_map = "res://scenes/maps/chapter3/dark_knight_arena.tscn"
+spawn_point = "from_shrine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitToBoss"]
+shape = SubResource("RectangleShape2D_area")
+
+[node name="ShrineCleared" type="Area2D" parent="Triggers"]
+position = Vector2(700, 300)
+script = ExtResource("2_trigger")
+trigger_id = "shrine_cleared"
+one_shot = true
+required_flags = ["demons_defeated"]
+event_type = "SetFlag"
+flag_name = "shrine_cleared"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ShrineCleared"]
+shape = SubResource("RectangleShape2D_area")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="MapNameLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 50.0
+text = "오염된 사당"
