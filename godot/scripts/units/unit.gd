@@ -13,6 +13,7 @@ class_name Unit
 @export var defense: int = 5
 @export var move_speed: float = 100.0
 @export var attack_range: float = 50.0
+var known_spells: Array[SpellData] = []
 
 # 현재 상태
 var current_hp: int
@@ -43,6 +44,9 @@ func _ready() -> void:
 	current_mp = max_mp
 	current_fatigue = 0
 
+	# CollisionShape2D 자동 설정 (없으면 생성)
+	_ensure_collision_shape()
+
 func _physics_process(delta: float) -> void:
 	match current_state:
 		UnitState.IDLE:
@@ -60,10 +64,19 @@ func change_state(new_state: UnitState) -> void:
 		current_state = new_state
 		state_changed.emit(new_state)
 
-## HP 변경
-func take_damage(damage: int) -> void:
-	var actual_damage = max(0, damage - defense)
-	current_hp = max(0, current_hp - actual_damage)
+## HP 변경 (최종 데미지 - defense 계산 없음)
+func take_damage(final_damage: int) -> void:
+	var actual = max(0, final_damage)
+	current_hp = max(0, current_hp - actual)
+	hp_changed.emit(current_hp, max_hp)
+
+	if current_hp <= 0:
+		die()
+
+## 환경 데미지용 (defense 적용)
+func take_raw_damage(raw_damage: int) -> void:
+	var actual = max(0, raw_damage - defense)
+	current_hp = max(0, current_hp - actual)
 	hp_changed.emit(current_hp, max_hp)
 
 	if current_hp <= 0:
@@ -101,11 +114,74 @@ func _process_moving(_delta: float) -> void:
 func _process_attacking(_delta: float) -> void:
 	pass
 
-func _process_resting(_delta: float) -> void:
-	rest(5)  # 초당 5 피로도 회복
+func _process_resting(delta: float) -> void:
+	# 초당 5 피로도 회복 (delta 기반)
+	var recovery = int(5.0 * delta * 60.0)
+	recovery = max(1, recovery) if delta > 0 else 0
+	rest(recovery)
 	if current_fatigue <= 0:
 		change_state(UnitState.IDLE)
 
 ## 이동 명령 (하위 클래스에서 오버라이드)
 func move_to(_target: Vector2) -> void:
 	pass
+
+## 목표 지점으로 이동 (공유 메서드)
+func _move_towards(target: Vector2) -> void:
+	change_state(UnitState.MOVING)
+	# FatigueSystem으로 속도 배율 계산
+	var speed_mult = 1.0
+	if current_fatigue > 0 and max_fatigue > 0:
+		var fatigue_percent = float(current_fatigue) / float(max_fatigue)
+		if fatigue_percent > 0.9:
+			speed_mult = 0.0  # COLLAPSED
+		elif fatigue_percent > 0.6:
+			speed_mult = 0.5  # EXHAUSTED
+		elif fatigue_percent > 0.3:
+			speed_mult = 0.8  # TIRED
+
+	var direction = (target - global_position).normalized()
+	velocity = direction * move_speed * speed_mult
+	move_and_slide()
+
+## 가장 가까운 타겟 찾기 (공유 메서드)
+func _find_nearest_target(target_list: Array, max_range: float):
+	var nearest = null
+	var nearest_distance: float = max_range
+	for unit in target_list:
+		if not unit.is_alive:
+			continue
+		var distance = global_position.distance_to(unit.global_position)
+		if distance < nearest_distance:
+			nearest = unit
+			nearest_distance = distance
+	return nearest
+
+## 마법 시전 인터페이스 (MagicSystem이 호출)
+func cast_spell(spell: SpellData, target = null) -> bool:
+	# Stub - Phase 3에서 MagicSystem과 연동
+	if current_mp < spell.mp_cost:
+		return false
+	# MagicSystem.cast_spell(self, spell, target) 호출 예정
+	return true
+
+## 마법 학습
+func learn_spell(spell: SpellData) -> void:
+	if spell and not known_spells.has(spell):
+		known_spells.append(spell)
+
+## CollisionShape2D 자동 설정
+func _ensure_collision_shape() -> void:
+	var collision = get_node_or_null("CollisionShape2D")
+	if collision and not collision.shape:
+		var circle = CircleShape2D.new()
+		circle.radius = 16.0  # 기본 충돌 반경
+		collision.shape = circle
+	elif not collision:
+		# CollisionShape2D 노드 자체가 없으면 생성
+		collision = CollisionShape2D.new()
+		collision.name = "CollisionShape2D"
+		var circle = CircleShape2D.new()
+		circle.radius = 16.0
+		collision.shape = circle
+		add_child(collision)

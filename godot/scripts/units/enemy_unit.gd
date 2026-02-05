@@ -18,6 +18,7 @@ var ai_state: EnemyAIState = EnemyAIState.PATROL
 var target_enemy = null  # Unit
 var patrol_points: Array[Vector2] = []
 var current_patrol_index: int = 0
+var combat_system: CombatSystem = null  # CombatSystem 참조
 
 var detection_range: float = 180.0
 var retreat_hp_threshold: float = 0.2
@@ -30,6 +31,11 @@ func _ready() -> void:
 	super._ready()
 	GameManager.register_unit(self, false)
 	_setup_patrol_points()
+
+	# CombatSystem 찾기 (부모 씬에서)
+	combat_system = get_node_or_null("../CombatSystem")
+	if not combat_system:
+		combat_system = get_tree().get_first_node_in_group("combat_system")
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -79,18 +85,7 @@ func _change_ai_state(new_state: EnemyAIState) -> void:
 
 ## 가장 가까운 적(플레이어) 찾기
 func _find_nearest_enemy():
-	var nearest = null  # Unit
-	var nearest_distance: float = detection_range
-
-	for unit in GameManager.player_units:
-		if not unit.is_alive:
-			continue
-		var distance = global_position.distance_to(unit.global_position)
-		if distance < nearest_distance:
-			nearest = unit
-			nearest_distance = distance
-
-	return nearest
+	return _find_nearest_target(GameManager.player_units, detection_range)
 
 ## 대기 행동
 func _ai_idle() -> void:
@@ -141,8 +136,12 @@ func _ai_attack() -> void:
 		_change_ai_state(EnemyAIState.CHASE)
 	else:
 		change_state(UnitState.ATTACKING)
-		target_enemy.take_damage(attack_power)
-		add_fatigue(10)  # FATIGUE_ATTACK
+		if combat_system:
+			combat_system.execute_attack(self, target_enemy)
+		else:
+			var damage = max(1, attack_power - target_enemy.defense)
+			target_enemy.take_damage(damage)
+			add_fatigue(10)  # FATIGUE_ATTACK
 
 ## 후퇴 행동
 func _ai_retreat() -> void:
@@ -155,21 +154,3 @@ func _ai_retreat() -> void:
 		_move_towards(global_position + retreat_direction * 100.0)
 
 	change_state(UnitState.RESTING)
-
-## 목표 지점으로 이동
-func _move_towards(target: Vector2) -> void:
-	change_state(UnitState.MOVING)
-
-	# 피로도 레벨 계산 (인라인)
-	var fatigue_percent = float(current_fatigue) / float(max_fatigue)
-	var speed_mult = 1.0
-	if fatigue_percent > 0.9:
-		speed_mult = 0.0  # COLLAPSED
-	elif fatigue_percent > 0.6:
-		speed_mult = 0.5  # EXHAUSTED
-	elif fatigue_percent > 0.3:
-		speed_mult = 0.8  # TIRED
-
-	var direction = (target - global_position).normalized()
-	velocity = direction * move_speed * speed_mult
-	move_and_slide()

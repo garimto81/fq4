@@ -25,10 +25,7 @@ func move_to(target: Vector2) -> void:
 	move_target = target
 	is_moving_to_target = true
 	change_state(UnitState.MOVING)
-
-	# 피로도 증가 (거리에 비례)
-	var distance = global_position.distance_to(target)
-	add_fatigue(int(distance / 10.0))
+	# 피로도는 실제 이동 중에 _process_moving()에서 누적됨
 
 func _process_idle(_delta: float) -> void:
 	# Idle 상태에서는 자동으로 피로도 회복
@@ -52,6 +49,11 @@ func _process_moving(delta: float) -> void:
 		# 이동 중
 		velocity = direction * move_speed
 		move_and_slide()
+		# 실제 이동 시 피로도 누적 (100픽셀당 1 피로도)
+		var moved = velocity.length() * delta
+		var fatigue = int(moved / 100.0)
+		if fatigue > 0:
+			add_fatigue(fatigue)
 
 ## 선택 상태 토글
 func set_selected(selected: bool) -> void:
@@ -66,8 +68,12 @@ func attack_target(target) -> void:  # Unit 타입
 	var distance = global_position.distance_to(target.global_position)
 	if distance <= attack_range:
 		change_state(UnitState.ATTACKING)
-		target.take_damage(attack_power)
-		add_fatigue(10)  # 공격 시 피로도 증가
+		if combat_system:
+			combat_system.execute_attack(self, target)
+		else:
+			var damage = max(1, attack_power - target.defense)
+			target.take_damage(damage)
+			add_fatigue(10)
 	else:
 		# 사거리 밖: 먼저 이동
 		move_to(target.global_position)

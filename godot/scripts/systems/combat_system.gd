@@ -5,6 +5,10 @@ class_name CombatSystem
 ## 유닛 간 전투 로직을 처리합니다.
 ## 데미지 계산, 사거리 체크, 전투 이벤트 등을 관리합니다.
 
+func _ready() -> void:
+	# combat_system 그룹에 추가하여 유닛들이 찾을 수 있게 함
+	add_to_group("combat_system")
+
 # 전투 상수
 const BASE_DAMAGE_VARIANCE: float = 0.1        # +-10% 데미지 편차
 const CRITICAL_HIT_CHANCE: float = 0.05        # 5% 크리티컬 확률
@@ -21,6 +25,7 @@ signal attack_evaded(attacker, target)
 signal damage_popup_requested(position: Vector2, damage: int, popup_type: int)
 signal unit_killed(attacker, victim)
 signal exp_gained(unit, amount: int)
+signal gold_rewarded(unit, amount: int)
 
 # 팝업 타입
 enum PopupType {
@@ -147,6 +152,10 @@ func _handle_enemy_kill(attacker, victim) -> void:
 	if attacker.has_method("gain_exp"):
 		attacker.gain_exp(exp_amount)
 		exp_gained.emit(attacker, exp_amount)
+
+	# 골드 보상 (Phase 4에서 InventorySystem 연동)
+	var gold_amount = 5 + (victim.max_hp / 20)
+	gold_rewarded.emit(attacker, gold_amount)
 
 ## 데미지 계산
 func calculate_damage(attacker, target) -> Dictionary:

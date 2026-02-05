@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name EquipmentSystem
 ## EquipmentSystem: 장비 시스템
 ##

@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name StatsSystem
 ## StatsSystem: RPG 스탯 시스템
 ##

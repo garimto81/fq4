@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name ExperienceSystem
 ## ExperienceSystem: 경험치 및 레벨 시스템
 ##
