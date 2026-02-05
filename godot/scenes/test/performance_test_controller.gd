@@ -77,21 +77,28 @@ func _update_fps_display() -> void:
 	memory_label.text = "Memory: %.1f MB" % memory_mb
 	memory_label.modulate = memory_color
 
+	# Spatial hash 통계
+	var spatial_cells = 0
+	if GameManager and GameManager.spatial_hash:
+		spatial_cells = GameManager.spatial_hash.cells.size()
+
 	# 상태 표시
 	if auto_benchmark_mode:
 		var test_status = benchmark.test_state
-		status_label.text = "Benchmark: %s\nUnits: %d\nTest: %d/%d" % [
+		status_label.text = "Benchmark: %s\nUnits: %d\nTest: %d/%d\nSpatial Cells: %d" % [
 			test_status,
 			current_unit_count,
 			benchmark.current_test_index + 1,
-			benchmark.test_unit_counts.size()
+			benchmark.test_unit_counts.size(),
+			spatial_cells
 		]
 	else:
-		status_label.text = "Manual Mode\nUnits: %d/%d\nFPS: %d\nMemory: %.1f MB" % [
+		status_label.text = "Manual Mode\nUnits: %d/%d\nFPS: %d\nMemory: %.1f MB\nSpatial Cells: %d" % [
 			current_unit_count,
 			max_unit_count,
 			fps,
-			memory_mb
+			memory_mb,
+			spatial_cells
 		]
 
 func _handle_input() -> void:

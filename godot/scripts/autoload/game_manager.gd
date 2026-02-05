@@ -27,6 +27,10 @@ var controlled_unit: Node = null  # 현재 플레이어가 조작 중인 유닛
 
 var current_turn: int = 0
 
+# 성능 최적화 시스템
+var spatial_hash: SpatialHash = SpatialHash.new()
+var unit_positions: Dictionary = {}  # unit -> last_position
+
 # 시그널
 signal state_changed(new_state: GameState)
 signal turn_advanced(turn_number: int)
@@ -37,6 +41,11 @@ signal controlled_unit_changed(unit: Node)
 
 func _ready() -> void:
 	print("GameManager initialized")
+	set_process(true)
+
+func _process(_delta: float) -> void:
+	# 유닛 위치 변경 시 spatial hash 업데이트
+	_update_spatial_hash()
 
 func _input(event: InputEvent) -> void:
 	if current_state != GameState.BATTLE:
@@ -74,12 +83,23 @@ func register_unit(unit: Node, is_player: bool) -> void:
 	else:
 		if not enemy_units.has(unit):
 			enemy_units.append(unit)
+
+	# Spatial hash에 추가
+	if unit is Node2D:
+		spatial_hash.insert(unit, unit.global_position)
+		unit_positions[unit] = unit.global_position
+
 	unit_spawned.emit(unit)
 
 ## 유닛 제거
 func unregister_unit(unit: Node) -> void:
 	player_units.erase(unit)
 	enemy_units.erase(unit)
+
+	# Spatial hash에서 제거
+	if unit_positions.has(unit):
+		spatial_hash.remove(unit, unit_positions[unit])
+		unit_positions.erase(unit)
 
 	# 부대에서도 제거
 	for squad_id in squads:
@@ -249,6 +269,8 @@ func reset_game() -> void:
 	current_unit_index = 0
 	controlled_unit = null
 	current_turn = 0
+	spatial_hash.clear()
+	unit_positions.clear()
 	change_state(GameState.MENU)
 
 ## 전투 시작
@@ -314,3 +336,36 @@ func command_all_defend() -> void:
 func command_all_retreat() -> void:
 	for squad_id in squads:
 		issue_squad_command(squad_id, 5)  # SquadCommand.RETREAT_ALL
+
+# ========== 성능 최적화 시스템 ==========
+
+## Spatial hash 업데이트 (매 프레임)
+func _update_spatial_hash() -> void:
+	for unit in unit_positions.keys():
+		if not is_instance_valid(unit):
+			unit_positions.erase(unit)
+			continue
+
+		if unit is Node2D:
+			var old_pos = unit_positions[unit]
+			var new_pos = unit.global_position
+
+			if old_pos.distance_squared_to(new_pos) > 1.0:  # 1픽셀 이상 이동 시에만 업데이트
+				spatial_hash.update(unit, old_pos, new_pos)
+				unit_positions[unit] = new_pos
+
+## 범위 내 유닛 쿼리 (최적화)
+func query_units_in_range(center: Vector2, radius: float, filter: Callable = Callable()) -> Array:
+	return spatial_hash.query_range(center, radius).filter(filter) if filter.is_valid() else spatial_hash.query_range(center, radius)
+
+## 가장 가까운 적 찾기 (최적화)
+func find_nearest_enemy(position: Vector2, max_range: float, is_player_unit: bool = true) -> Node:
+	var target_list = enemy_units if is_player_unit else player_units
+	var filter = func(u): return u in target_list and u.is_alive
+	return spatial_hash.query_nearest(position, max_range, filter)
+
+## 가장 가까운 아군 찾기 (최적화)
+func find_nearest_ally(position: Vector2, max_range: float, is_player_unit: bool = true) -> Node:
+	var target_list = player_units if is_player_unit else enemy_units
+	var filter = func(u): return u in target_list and u.is_alive
+	return spatial_hash.query_nearest(position, max_range, filter)
