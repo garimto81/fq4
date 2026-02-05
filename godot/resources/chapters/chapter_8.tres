@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 8
+chapter_name = "다크 타워"
+chapter_subtitle = "어둠의 탑"
+description = "하늘 높이 솟은 어둠의 탑. 층마다 강해지는 적들과 싸우며 정상을 향해 올라가야 한다."
+maps = ["res://scenes/maps/chapter8/tower_base.tscn", "res://scenes/maps/chapter8/tower_middle.tscn", "res://scenes/maps/chapter8/tower_top.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter8/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter8/chapter8_clear.tres"
+clear_flags = ["demon_general_defeated", "dark_tower_cleared"]
+boss_map = "res://scenes/maps/chapter8/tower_top.tscn"
+boss_enemy_id = "demon_general"
+bgm_path = "res://assets/audio/bgm/chapter8_theme.ogg"

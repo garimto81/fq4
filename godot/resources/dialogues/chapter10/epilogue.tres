@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter10_epilogue"
+title = "에필로그"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "마왕이 쓰러지며 어둠이 걷히기 시작한다. 세계에 다시 빛이 돌아온다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "해냈어... 정말로 해냈어!",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "길고 힘든 여정이었지만, 함께였기에 가능했어. 모두 고마워.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "영웅들은 왕국으로 돌아갔다. 사람들의 환호 속에서 새로운 시대가 열린다.",
+"next": "narrator_3"
+}, {
+"id": "narrator_3",
+"speaker": "나레이터",
+"portrait": "",
+"text": "어둠은 물러갔고, 평화가 찾아왔다. 하지만 영웅들의 이야기는 영원히 기억될 것이다.",
+"next": "narrator_4"
+}, {
+"id": "narrator_4",
+"speaker": "나레이터",
+"portrait": "",
+"text": "First Queen 4 - The End",
+"event": "set_flag:game_completed",
+"next": ""
+}]

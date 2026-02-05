@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter9_intro"
+title = "챕터 9 - 타락한 왕국"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "한때 번영했던 왕국의 수도. 이제는 마물들에게 점령당한 폐허가 되었다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "거리는 황폐하고, 성벽은 무너졌으며, 어둠의 깃발이 곳곳에 펄럭이고 있다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "저기... 저건 우리 편이었던 기사들이야. 하지만 이제는...",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "타락해버렸군. 마음이 아프지만, 왕국을 되찾으려면 싸워야 해.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "왕국을 되찾자! 우리의 고향을 되돌려놓을 거야!",
+"event": "set_flag:chapter9_started",
+"next": ""
+}]

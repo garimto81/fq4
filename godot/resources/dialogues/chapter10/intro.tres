@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter10_intro"
+title = "챕터 10 - 최종 결전"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "마계의 심연. 모든 어둠의 근원지. 공기조차 마력으로 일그러져 있다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "앞에 펼쳐진 것은 마왕의 옥좌. 이 긴 여정의 종착점이다.",
+"next": "demon_king_1"
+}, {
+"id": "demon_king_1",
+"speaker": "마왕",
+"portrait": "",
+"text": "잘도 여기까지 왔구나, 인간이여. 하지만 여기가 네 무덤이 될 것이다.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "끝내주겠다! 왕국과 세계의 평화를 위해!",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "모두 함께! 이것이 우리의 마지막 싸움이야!",
+"next": "demon_king_2"
+}, {
+"id": "demon_king_2",
+"speaker": "마왕",
+"portrait": "",
+"text": "어리석은... 내 힘 앞에 무릎 꿇어라!",
+"event": "set_flag:chapter10_started",
+"next": ""
+}]

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter8_clear"
+title = "챕터 8 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "마장군이 쓰러지며 탑 전체가 흔들리기 시작한다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "해냈어! 하지만 아직 끝이 아니야. 더 큰 어둠이 남아 있어.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "이곳은 시작에 불과했어. 진짜 싸움은 이제부터야.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "다크 타워를 정복했다. 하지만 왕국은 여전히 위기에 처해 있다.",
+"event": "set_flag:chapter8_cleared",
+"next": ""
+}]

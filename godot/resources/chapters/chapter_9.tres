@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 9
+chapter_name = "타락한 왕국"
+chapter_subtitle = "왕국 탈환"
+description = "마물에 점령된 왕국을 되찾기 위한 전투. 한때 아군이었던 자들과도 싸워야 한다."
+maps = ["res://scenes/maps/chapter9/fallen_city.tscn", "res://scenes/maps/chapter9/castle_siege.tscn", "res://scenes/maps/chapter9/throne_room.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter9/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter9/chapter9_clear.tres"
+clear_flags = ["fallen_hero_defeated", "kingdom_liberated"]
+boss_map = "res://scenes/maps/chapter9/throne_room.tscn"
+boss_enemy_id = "fallen_hero"
+bgm_path = "res://assets/audio/bgm/chapter9_theme.ogg"

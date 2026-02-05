@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter8_intro"
+title = "챕터 8 - 다크 타워"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "하늘 높이 솟은 검은 탑. 어둠이 꿈틀대며 탑 주변을 감싸고 있다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "탑의 정상에서 강렬한 마력이 느껴진다. 이곳이 적의 핵심 거점임이 분명하다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "층마다 강한 적들이 지키고 있을 거야. 한 층씩 신중하게 올라가자.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "정상에 있는 자가 이 모든 것의 원흉이겠지. 끝까지 올라가야 해.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "준비됐어. 함께 이 탑을 정복하자!",
+"event": "set_flag:chapter8_started",
+"next": ""
+}]

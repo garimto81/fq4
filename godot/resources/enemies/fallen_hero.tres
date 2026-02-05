@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "fallen_hero"
+display_name = "Fallen Hero"
+description = "A once noble hero corrupted by dark powers"
+enemy_type = 2
+base_hp = 550
+base_mp = 100
+base_atk = 40
+base_def = 22
+base_spd = 85
+base_lck = 12
+attack_range = 75.0
+detection_range = 270.0
+ai_tick_interval = 0.22
+exp_reward = 450
+gold_reward = 250
+drop_table = []
+hp_per_level = 60
+atk_per_level = 7
+def_per_level = 4

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 10
+chapter_name = "최종 결전"
+chapter_subtitle = "마왕과의 대결"
+description = "모든 여정의 끝. 마왕과의 최후의 결전. 왕국의 운명이 결정된다."
+maps = ["res://scenes/maps/chapter10/demon_realm.tscn", "res://scenes/maps/chapter10/final_corridor.tscn", "res://scenes/maps/chapter10/demon_throne.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter10/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter10/epilogue.tres"
+clear_flags = ["demon_king_defeated"]
+boss_map = "res://scenes/maps/chapter10/demon_throne.tscn"
+boss_enemy_id = "demon_king"
+bgm_path = "res://assets/audio/bgm/chapter10_theme.ogg"

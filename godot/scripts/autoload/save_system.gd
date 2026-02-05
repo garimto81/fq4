@@ -294,3 +294,37 @@ func _get_main_player_level(save_data: Dictionary) -> int:
 	if first_unit.has("experience"):
 		return first_unit["experience"].get("current_level", 1)
 	return 1
+
+## 범용 데이터 저장 (NG+ 등)
+func save_data(key: String, data: Dictionary) -> bool:
+	var path = SAVE_DIR + key + ".json"
+	var json_string = JSON.stringify(data, "\t")
+
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		push_error("Failed to save data: " + key)
+		return false
+
+	file.store_string(json_string)
+	file.close()
+	return true
+
+## 범용 데이터 로드 (NG+ 등)
+func load_data(key: String) -> Dictionary:
+	var path = SAVE_DIR + key + ".json"
+	if not FileAccess.file_exists(path):
+		return {}
+
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {}
+
+	var json_string = file.get_as_text()
+	file.close()
+
+	var json = JSON.new()
+	if json.parse(json_string) != OK:
+		push_error("Failed to parse data: " + key)
+		return {}
+
+	return json.get_data()

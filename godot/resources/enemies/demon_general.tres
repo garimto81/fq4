@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "demon_general"
+display_name = "Demon General"
+description = "A high-ranking demon commanding the dark tower forces"
+enemy_type = 2
+base_hp = 600
+base_mp = 90
+base_atk = 35
+base_def = 25
+base_spd = 75
+base_lck = 10
+attack_range = 70.0
+detection_range = 250.0
+ai_tick_interval = 0.25
+exp_reward = 400
+gold_reward = 200
+drop_table = []
+hp_per_level = 55
+atk_per_level = 6
+def_per_level = 4

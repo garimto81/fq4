@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter9_clear"
+title = "챕터 9 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "타락한 영웅이 쓰러지며 어둠의 저주가 풀린다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "왕국이 다시 우리 손에 돌아왔어! 하지만 피해가 너무 커...",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "복구는 나중에. 아직 마왕이 남아있어. 그를 쓰러뜨려야 진정한 평화가 온다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "왕국을 되찾았다. 이제 남은 것은 마왕과의 최종 결전뿐이다.",
+"event": "set_flag:chapter9_cleared",
+"next": ""
+}]

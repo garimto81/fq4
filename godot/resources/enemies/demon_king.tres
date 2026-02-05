@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "demon_king"
+display_name = "Demon King"
+description = "The ultimate evil threatening the kingdom - the final boss"
+enemy_type = 2
+base_hp = 1000
+base_mp = 150
+base_atk = 50
+base_def = 30
+base_spd = 95
+base_lck = 15
+attack_range = 85.0
+detection_range = 300.0
+ai_tick_interval = 0.2
+exp_reward = 1000
+gold_reward = 500
+drop_table = []
+hp_per_level = 80
+atk_per_level = 9
+def_per_level = 5
