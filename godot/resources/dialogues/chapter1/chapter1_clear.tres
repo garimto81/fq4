@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter1_clear"
+title = "챕터 1 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "고블린 족장이 쓰러지며 전장에 잠시 정적이 흘렀다. 남은 고블린들은 혼란에 빠져 달아나기 시작한다.",
+"next": "captain_1"
+}, {
+"id": "captain_1",
+"speaker": "기사단장",
+"portrait": "",
+"text": "훌륭했다! 네 덕분에 위기를 넘겼어. 하지만... 이건 시작에 불과해.",
+"next": "captain_2"
+}, {
+"id": "captain_2",
+"speaker": "기사단장",
+"portrait": "",
+"text": "이 정도 규모의 마물 군단이 움직인다는 건, 뒤에 더 큰 세력이 있다는 뜻이지.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "그럼 다음은 어디로 가야 하죠?",
+"next": "captain_3"
+}, {
+"id": "captain_3",
+"speaker": "기사단장",
+"portrait": "",
+"text": "마을로 가라. 거기서 동료를 모집해야 할 거다. 혼자서는 앞으로의 전투를 견딜 수 없어.",
+"event": "set_flag:chapter1_complete",
+"next": ""
+}]

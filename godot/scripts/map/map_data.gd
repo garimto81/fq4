@@ -28,6 +28,19 @@ class_name MapData
 # 적 웨이브 설정
 @export var enemy_waves: Array[Dictionary] = []
 
+# 적 스폰 정보
+## 일반 적 스폰 정보 배열
+## 예: [{"enemy_id": "goblin", "position": Vector2(100, 200), "count": 3}]
+@export var enemy_spawns: Array[Dictionary] = []
+
+## 보스 스폰 정보
+## 예: {"enemy_id": "goblin_chief", "position": Vector2(640, 400)}
+@export var boss_spawn: Dictionary = {}
+
+## 플레이어/동료 스폰 위치
+## 예: {"default": Vector2(100, 100), "from_forest": Vector2(50, 300)}
+@export var spawn_points: Dictionary = {}
+
 ## 경계 Rect2 반환
 func get_bounds() -> Rect2:
 	return Rect2(0, 0, map_width, map_height)
@@ -45,3 +58,20 @@ func is_town() -> bool:
 
 func is_dungeon() -> bool:
 	return map_type == "Dungeon"
+
+## 적 스폰 정보 가져오기
+func get_enemy_spawns() -> Array[Dictionary]:
+	return enemy_spawns
+
+## 보스 스폰 정보 가져오기
+func get_boss_spawn() -> Dictionary:
+	return boss_spawn
+
+## 스폰 지점 가져오기
+func get_spawn_point(name: String) -> Vector2:
+	if spawn_points.has(name):
+		return spawn_points[name]
+	# 기본 스폰 지점이 없으면 맵 중앙 반환
+	if spawn_points.has("default"):
+		return spawn_points["default"]
+	return Vector2(map_width / 2, map_height / 2)

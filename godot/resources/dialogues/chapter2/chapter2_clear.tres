@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter2_clear"
+title = "챕터 2 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "믿음직한 동료들이 모였다. 각자의 사연을 가진 이들이지만, 지금은 하나의 목표를 향해 나아간다.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "여러분, 감사합니다. 이제 우리는 함께 싸울 동료입니다.",
+"next": "mercenary_1"
+}, {
+"id": "mercenary_1",
+"speaker": "용병",
+"portrait": "",
+"text": "하! 좋은 말이야. 그럼 이제 어디로 가는 거지? 설마 성으로 돌아가자는 건 아니겠지?",
+"next": "hero_2"
+}, {
+"id": "hero_2",
+"speaker": "주인공",
+"portrait": "",
+"text": "어둠의 숲으로 갑니다. 마물들이 거기서 나타났다는 보고가 있었어요.",
+"next": "narrator_end"
+}, {
+"id": "narrator_end",
+"speaker": "나레이터",
+"portrait": "",
+"text": "새로운 부대는 어둠의 숲을 향해 출발했다. 그들을 기다리는 것은 더 강력한 적과 예상치 못한 진실이었다...",
+"event": "set_flag:chapter2_complete",
+"next": ""
+}]
