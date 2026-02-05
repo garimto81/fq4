@@ -164,7 +164,8 @@ func _collect_save_data() -> Dictionary:
 		"game_state": _collect_game_state(),
 		"player_units": _collect_player_units(),
 		"inventory": _collect_inventory(),
-		"squads": _collect_squads()
+		"squads": _collect_squads(),
+		"achievements": _collect_achievements()
 	}
 
 ## 게임 상태 수집
@@ -249,6 +250,12 @@ func _collect_squads() -> Dictionary:
 
 	return squads_data
 
+## 업적 데이터 수집
+func _collect_achievements() -> Dictionary:
+	if has_node("/root/AchievementSystem"):
+		return get_node("/root/AchievementSystem").serialize()
+	return {}
+
 ## 플레이 시간 (초)
 func _get_play_time() -> int:
 	if has_node("/root/ProgressionSystem"):
@@ -278,6 +285,13 @@ func _apply_save_data(data: Dictionary) -> void:
 		var progression_data = game_state.get("progression", {})
 		if not progression_data.is_empty():
 			progression.deserialize(progression_data)
+
+	# AchievementSystem 복원
+	if has_node("/root/AchievementSystem"):
+		var achievements = get_node("/root/AchievementSystem")
+		var achievement_data = data.get("achievements", {})
+		if not achievement_data.is_empty():
+			achievements.deserialize(achievement_data)
 
 	# TODO: 유닛, 인벤토리, 부대 복원 구현
 	# 이는 씬 로딩과 연결되어야 하므로 별도 처리 필요

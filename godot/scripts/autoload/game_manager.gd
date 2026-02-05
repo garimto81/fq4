@@ -38,6 +38,9 @@ signal unit_spawned(unit: Node)
 signal unit_died(unit: Node)
 signal squad_changed(squad_id: int)
 signal controlled_unit_changed(unit: Node)
+signal enemy_killed()
+signal chapter_completed(chapter_id: String)
+signal boss_defeated(boss_id: String)
 
 func _ready() -> void:
 	print("GameManager initialized")
@@ -108,6 +111,14 @@ func unregister_unit(unit: Node) -> void:
 	# 조작 중인 유닛이 죽으면 다음 유닛으로 전환
 	if unit == controlled_unit:
 		_find_next_controllable_unit()
+
+	# 적 처치 시 업적 시스템 알림
+	if enemy_units.has(unit):
+		enemy_killed.emit()
+		# 보스 체크
+		if unit.has_meta("is_boss") and unit.get_meta("is_boss"):
+			var boss_id = unit.get_meta("boss_id", "unknown")
+			boss_defeated.emit(boss_id)
 
 	unit_died.emit(unit)
 	_check_game_over()

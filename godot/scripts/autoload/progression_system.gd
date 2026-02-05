@@ -85,12 +85,22 @@ func _check_chapter_clear() -> void:
 		chapter_cleared.emit(current_chapter)
 		print("[Progression] Chapter %d cleared!" % current_chapter)
 
+		# 업적 시스템 알림
+		if has_node("/root/AchievementSystem"):
+			var chapter_id = "chapter_%d" % current_chapter
+			AchievementSystem.complete_chapter(chapter_id)
+		if has_node("/root/GameManager"):
+			GameManager.chapter_completed.emit("chapter_%d" % current_chapter)
+
 		# 다음 챕터로 자동 진행 (3챕터까지)
 		if current_chapter < 3:
 			change_chapter(current_chapter + 1)
 		else:
 			game_cleared.emit()
 			print("[Progression] Game cleared!")
+			# 게임 클리어 시 스피드런/무사망 체크
+			if has_node("/root/AchievementSystem"):
+				AchievementSystem.check_completion_achievements(play_time_seconds)
 
 ## 챕터 클리어 여부
 func is_chapter_cleared(chapter: int) -> bool:

@@ -1,0 +1,10 @@
+# GodotSteam 플러그인 설치 위치
+# https://godotsteam.com/tutorials/initializing/
+#
+# 설치 방법:
+# 1. GodotSteam 릴리즈 다운로드
+# 2. addons/godotsteam 폴더에 압축 해제
+# 3. project.godot에서 플러그인 활성화
+# 4. steam_manager.gd 주석 해제
+#
+# 이 파일은 플러그인 설치 전까지 폴더를 무시합니다.

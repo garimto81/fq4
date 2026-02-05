@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="First Queen 4 Remake"
+config/name="First Queen 4 HD"
+config/description="First Queen 4 HD Remake - Gocha-Kyara Real-time Tactical RPG"
+config/version="1.0.0"
 run/main_scene="res://scenes/game/main_game.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.ico"
+boot_splash/image="res://assets/images/splash/boot_splash.png"
+boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]
 
@@ -29,11 +33,13 @@ AccessibilitySystem="*res://scripts/autoload/accessibility_system.gd"
 InputManager="*res://scripts/autoload/input_manager.gd"
 PoolManager="*res://scripts/autoload/pool_manager.gd"
 EffectManager="*res://scripts/autoload/effect_manager.gd"
+AchievementSystem="*res://scripts/autoload/achievement_system.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
+window/size/resizable=true
 window/size/mode=2
 window/stretch/mode="viewport"
 
@@ -113,4 +119,5 @@ toggle_inventory={
 
 [rendering]
 
+renderer/rendering_method="forward_plus"
 textures/canvas_textures/default_texture_filter=0

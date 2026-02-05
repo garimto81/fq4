@@ -1,0 +1,57 @@
+key,en,ja,ko
+ACH_CHAPTER_1_NAME,Chapter 1 Complete,第1章クリア,1장 클리어
+ACH_CHAPTER_1_DESC,Clear Chapter 1: The Beginning,第1章「始まり」をクリアする,1장 '시작'을 클리어하세요
+ACH_CHAPTER_2_NAME,Chapter 2 Complete,第2章クリア,2장 클리어
+ACH_CHAPTER_2_DESC,Clear Chapter 2: First Battle,第2章「初陣」をクリアする,2장 '첫 번째 전투'를 클리어하세요
+ACH_CHAPTER_3_NAME,Chapter 3 Complete,第3章クリア,3장 클리어
+ACH_CHAPTER_3_DESC,Clear Chapter 3: Dark Forest,第3章「暗黒の森」をクリアする,3장 '어둠의 숲'을 클리어하세요
+ACH_CHAPTER_4_NAME,Chapter 4 Complete,第4章クリア,4장 클리어
+ACH_CHAPTER_4_DESC,Clear Chapter 4: Mountain Pass,第4章「山道」をクリアする,4장 '산길'을 클리어하세요
+ACH_CHAPTER_5_NAME,Chapter 5 Complete,第5章クリア,5장 클리어
+ACH_CHAPTER_5_DESC,Clear Chapter 5: Desert Ruins,第5章「砂漠の遺跡」をクリアする,5장 '사막의 유적'을 클리어하세요
+ACH_CHAPTER_6_NAME,Chapter 6 Complete,第6章クリア,6장 클리어
+ACH_CHAPTER_6_DESC,Clear Chapter 6: Frozen Plains,第6章「凍てつく平原」をクリアする,6장 '얼어붙은 평원'을 클리어하세요
+ACH_CHAPTER_7_NAME,Chapter 7 Complete,第7章クリア,7장 클리어
+ACH_CHAPTER_7_DESC,Clear Chapter 7: Demon's Gate,第7章「魔王の門」をクリアする,7장 '마왕의 문'을 클리어하세요
+ACH_CHAPTER_8_NAME,Chapter 8 Complete,第8章クリア,8장 클리어
+ACH_CHAPTER_8_DESC,Clear Chapter 8: Hell's Keep,第8章「地獄の砦」をクリアする,8장 '지옥의 요새'를 클리어하세요
+ACH_CHAPTER_9_NAME,Chapter 9 Complete,第9章クリア,9장 클리어
+ACH_CHAPTER_9_DESC,Clear Chapter 9: Final Siege,第9章「最終決戦」をクリアする,9장 '최종 공성전'을 클리어하세요
+ACH_CHAPTER_10_NAME,Chapter 10 Complete,第10章クリア,10장 클리어
+ACH_CHAPTER_10_DESC,Clear Chapter 10: Demon King's Throne,第10章「魔王の玉座」をクリアする,10장 '마왕의 옥좌'를 클리어하세요
+ACH_BOSS_DEMON_GENERAL_NAME,Demon General Defeated,魔将軍討伐,마장군 처치
+ACH_BOSS_DEMON_GENERAL_DESC,Defeat the Demon General,魔将軍を倒す,마장군을 처치하세요
+ACH_BOSS_FALLEN_HERO_NAME,Fallen Hero Defeated,堕ちた英雄討伐,타락한 영웅 처치
+ACH_BOSS_FALLEN_HERO_DESC,Defeat the Fallen Hero,堕ちた英雄を倒す,타락한 영웅을 처치하세요
+ACH_BOSS_DEMON_KING_NAME,Demon King Defeated,魔王討伐,마왕 처치
+ACH_BOSS_DEMON_KING_DESC,Defeat the Demon King,魔王を倒す,마왕을 처치하세요
+ACH_BOSS_ALL_NAME,Boss Hunter,ボスハンター,보스 헌터
+ACH_BOSS_ALL_DESC,Defeat all bosses,すべてのボスを倒す,모든 보스를 처치하세요
+ACH_LEVEL_NOVICE_NAME,Novice Warrior,見習い戦士,견습 전사
+ACH_LEVEL_NOVICE_DESC,Reach level 10 with any unit,任意のユニットをレベル10にする,아무 유닛이나 레벨 10에 도달하세요
+ACH_LEVEL_VETERAN_NAME,Veteran Warrior,熟練戦士,베테랑 전사
+ACH_LEVEL_VETERAN_DESC,Reach level 30 with any unit,任意のユニットをレベル30にする,아무 유닛이나 레벨 30에 도달하세요
+ACH_LEVEL_MASTER_NAME,Master Warrior,達人戦士,마스터 전사
+ACH_LEVEL_MASTER_DESC,Reach level 50 with any unit,任意のユニットをレベル50にする,아무 유닛이나 레벨 50에 도달하세요
+ACH_KILLS_HUNTER_NAME,Monster Hunter,モンスターハンター,몬스터 헌터
+ACH_KILLS_HUNTER_DESC,Defeat 100 enemies,敵を100体倒す,적을 100명 처치하세요
+ACH_KILLS_SLAYER_NAME,Monster Slayer,モンスタースレイヤー,몬스터 슬레이어
+ACH_KILLS_SLAYER_DESC,Defeat 500 enemies,敵を500体倒す,적을 500명 처치하세요
+ACH_KILLS_LEGEND_NAME,Legendary Slayer,伝説のスレイヤー,전설적인 슬레이어
+ACH_KILLS_LEGEND_DESC,Defeat 1000 enemies,敵を1000体倒す,적을 1000명 처치하세요
+ACH_ENDING_GOOD_NAME,Good Ending,グッドエンディング,해피 엔딩
+ACH_ENDING_GOOD_DESC,Reach the Good Ending,グッドエンディングを見る,해피 엔딩에 도달하세요
+ACH_ENDING_NORMAL_NAME,Normal Ending,ノーマルエンディング,노멀 엔딩
+ACH_ENDING_NORMAL_DESC,Reach the Normal Ending,ノーマルエンディングを見る,노멀 엔딩에 도달하세요
+ACH_ENDING_BAD_NAME,Bad Ending,バッドエンディング,배드 엔딩
+ACH_ENDING_BAD_DESC,Reach the Bad Ending,バッドエンディングを見る,배드 엔딩에 도달하세요
+ACH_SPEED_RUN_NAME,Speed Demon,スピードデーモン,스피드 데몬
+ACH_SPEED_RUN_DESC,Clear the game in under 2 hours,2時間以内にゲームをクリアする,2시간 이내에 게임을 클리어하세요
+ACH_NO_DEATH_NAME,Immortal,不死身,불사신
+ACH_NO_DEATH_DESC,Clear the game without any deaths,一度も死なずにゲームをクリアする,아무도 죽지 않고 게임을 클리어하세요
+ACH_NG_PLUS_NAME,New Game Plus,ニューゲームプラス,뉴게임 플러스
+ACH_NG_PLUS_DESC,Start a New Game Plus,ニューゲームプラスを始める,뉴게임 플러스를 시작하세요
+ACH_FORMATION_MASTER_NAME,Formation Master,陣形マスター,진형 마스터
+ACH_FORMATION_MASTER_DESC,Use all 5 formations,5つの陣形をすべて使用する,5개 진형을 모두 사용하세요
+ACH_SPELL_MASTER_NAME,Spell Master,魔法マスター,마법 마스터
+ACH_SPELL_MASTER_DESC,Cast 100 spells,魔法を100回使用する,마법을 100회 시전하세요
