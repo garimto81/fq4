@@ -1,0 +1,36 @@
+key,ja,ko,en
+enemy.goblin,ゴブリン,고블린,Goblin
+enemy.goblin_archer,ゴブリンアーチャー,고블린 궁수,Goblin Archer
+enemy.goblin_shaman,ゴブリンシャーマン,고블린 주술사,Goblin Shaman
+enemy.goblin_chief,ゴブリンチーフ,고블린 족장,Goblin Chief
+enemy.orc,オーク,오크,Orc
+enemy.orc_warrior,オークウォリアー,오크 전사,Orc Warrior
+enemy.orc_berserker,オークバーサーカー,오크 광전사,Orc Berserker
+enemy.troll,トロール,트롤,Troll
+enemy.ogre,オーガ,오거,Ogre
+enemy.skeleton,スケルトン,스켈레톤,Skeleton
+enemy.skeleton_knight,スケルトンナイト,스켈레톤 기사,Skeleton Knight
+enemy.zombie,ゾンビ,좀비,Zombie
+enemy.ghost,ゴースト,유령,Ghost
+enemy.wraith,レイス,망령,Wraith
+enemy.vampire,ヴァンパイア,뱀파이어,Vampire
+enemy.lich,リッチ,리치,Lich
+enemy.slime,スライム,슬라임,Slime
+enemy.poison_slime,ポイズンスライム,독 슬라임,Poison Slime
+enemy.metal_slime,メタルスライム,메탈 슬라임,Metal Slime
+enemy.wolf,ウルフ,늑대,Wolf
+enemy.dire_wolf,ダイアウルフ,다이어 울프,Dire Wolf
+enemy.wyvern,ワイバーン,와이번,Wyvern
+enemy.dragon,ドラゴン,드래곤,Dragon
+enemy.dark_knight,ダークナイト,다크 나이트,Dark Knight
+enemy.death_knight,デスナイト,데스 나이트,Death Knight
+enemy.demon,デーモン,데몬,Demon
+enemy.greater_demon,グレーターデーモン,그레이터 데몬,Greater Demon
+enemy.archfiend,大魔王,대마왕,Archfiend
+enemy.demon_king,魔王,마왕,Demon King
+enemy.corrupted_guardian,堕落の守護者,타락한 수호자,Corrupted Guardian
+enemy.shadow_assassin,シャドウアサシン,그림자 암살자,Shadow Assassin
+enemy.necromancer,ネクロマンサー,네크로맨서,Necromancer
+enemy.dark_mage,ダークメイジ,다크 메이지,Dark Mage
+enemy.bandit,山賊,산적,Bandit
+enemy.bandit_leader,山賊の頭,산적 두목,Bandit Leader

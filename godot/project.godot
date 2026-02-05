@@ -24,6 +24,8 @@ ProgressionSystem="*res://scripts/autoload/progression_system.gd"
 ChapterManager="*res://scripts/autoload/chapter_manager.gd"
 EventSystem="*res://scripts/events/event_system.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+LocalizationManager="*res://scripts/autoload/localization_manager.gd"
+AccessibilitySystem="*res://scripts/autoload/accessibility_system.gd"
 
 [display]
 
@@ -42,5 +44,4 @@ toggle_inventory={
 
 [rendering]
 
-renderer/rendering_method="forward_plus"
 textures/canvas_textures/default_texture_filter=0

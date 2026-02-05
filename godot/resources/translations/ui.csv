@@ -1,0 +1,50 @@
+key,ja,ko,en
+ui.start_game,ゲームスタート,게임 시작,Start Game
+ui.continue,続ける,계속하기,Continue
+ui.new_game,はじめから,새 게임,New Game
+ui.options,オプション,설정,Options
+ui.quit,終了,종료,Quit
+ui.save,セーブ,저장,Save
+ui.load,ロード,불러오기,Load
+ui.inventory,アイテム,인벤토리,Inventory
+ui.shop,ショップ,상점,Shop
+ui.buy,購入,구매,Buy
+ui.sell,売却,판매,Sell
+ui.equip,装備,장착,Equip
+ui.unequip,装備解除,장착 해제,Unequip
+ui.use,使用,사용,Use
+ui.discard,捨てる,버리기,Discard
+ui.gold,G,G,G
+ui.level,Lv.,Lv.,Lv.
+ui.hp,HP,HP,HP
+ui.mp,MP,MP,MP
+ui.atk,攻撃,공격,ATK
+ui.def,防御,방어,DEF
+ui.spd,速度,속도,SPD
+ui.int,知力,지력,INT
+ui.exp,経験値,경험치,EXP
+ui.squad,部隊,부대,Squad
+ui.formation,陣形,대형,Formation
+ui.party,パーティ,파티,Party
+ui.status,ステータス,상태,Status
+ui.skills,スキル,스킬,Skills
+ui.magic,魔法,마법,Magic
+ui.confirm,決定,확인,Confirm
+ui.cancel,キャンセル,취소,Cancel
+ui.back,戻る,뒤로,Back
+ui.next,次へ,다음,Next
+ui.previous,前へ,이전,Previous
+ui.yes,はい,예,Yes
+ui.no,いいえ,아니오,No
+ui.pause,ポーズ,일시정지,Pause
+ui.resume,再開,재개,Resume
+ui.settings,設定,설정,Settings
+ui.volume,音量,볼륨,Volume
+ui.bgm,BGM,BGM,BGM
+ui.sfx,効果音,효과음,SFX
+ui.fullscreen,フルスクリーン,전체 화면,Fullscreen
+ui.windowed,ウィンドウ,창 모드,Windowed
+ui.graphics,グラフィック,그래픽,Graphics
+ui.controls,操作,조작,Controls
+ui.language,言語,언어,Language
+ui.return_to_title,タイトルに戻る,타이틀로 돌아가기,Return to Title

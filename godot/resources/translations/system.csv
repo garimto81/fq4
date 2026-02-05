@@ -1,0 +1,32 @@
+key,ja,ko,en
+sys.save_complete,セーブしました,저장되었습니다,Game Saved
+sys.load_complete,ロードしました,불러왔습니다,Game Loaded
+sys.save_failed,セーブに失敗しました,저장에 실패했습니다,Save Failed
+sys.load_failed,ロードに失敗しました,불러오기에 실패했습니다,Load Failed
+sys.not_enough_gold,ゴールドが足りません,골드가 부족합니다,Not enough gold
+sys.inventory_full,アイテムがいっぱいです,인벤토리가 가득 찼습니다,Inventory full
+sys.level_up,レベルアップ！,레벨 업!,Level Up!
+sys.game_over,ゲームオーバー,게임 오버,Game Over
+sys.victory,勝利！,승리!,Victory!
+sys.boss_encounter,ボス戦開始,보스 등장,Boss Encounter
+sys.chapter_complete,章クリア！,챕터 완료!,Chapter Complete!
+sys.obtained_item,%sを入手した,%s을(를) 획득했습니다,Obtained %s
+sys.learned_skill,%sを習得した,%s을(를) 습득했습니다,Learned %s
+sys.equipped_item,%sを装備した,%s을(를) 장착했습니다,Equipped %s
+sys.cannot_equip,装備できません,장착할 수 없습니다,Cannot equip
+sys.cannot_use,使用できません,사용할 수 없습니다,Cannot use
+sys.not_enough_mp,MPが足りません,MP가 부족합니다,Not enough MP
+sys.out_of_range,射程外です,사정거리 밖입니다,Out of range
+sys.target_required,対象を選んでください,대상을 선택하세요,Select a target
+sys.battle_start,戦闘開始！,전투 시작!,Battle Start!
+sys.battle_end,戦闘終了,전투 종료,Battle End
+sys.exp_gained,経験値%d獲得,경험치 %d 획득,Gained %d EXP
+sys.gold_gained,ゴールド%d獲得,골드 %d 획득,Obtained %d Gold
+sys.hp_restored,HP回復！,HP 회복!,HP Restored!
+sys.mp_restored,MP回復！,MP 회복!,MP Restored!
+sys.status_effect_applied,%sになった,%s 상태가 되었습니다,%s applied
+sys.status_effect_removed,%sが治った,%s 상태가 해제되었습니다,%s removed
+sys.ally_joined,%sが仲間になった,%s이(가) 동료가 되었습니다,%s joined the party
+sys.ally_left,%sが離脱した,%s이(가) 떠났습니다,%s left the party
+sys.checkpoint_reached,チェックポイント到達,체크포인트 도달,Checkpoint Reached
+sys.auto_save,オートセーブ,자동 저장,Auto Save

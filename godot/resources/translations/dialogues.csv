@@ -1,0 +1,17 @@
+key,ja,ko,en
+greeting_player,こんにちは、{player_name}さん！,안녕하세요 {player_name}님!,Hello {player_name}!
+farewell_player,さようなら、{player_name}さん。またね！,안녕히 가세요 {player_name}님. 또 만나요!,Goodbye {player_name}. See you!
+quest_accept,依頼を受けました,퀘스트를 수락했습니다,Quest accepted
+quest_complete,依頼を達成しました！,퀘스트를 완료했습니다!,Quest completed!
+shop_greeting,いらっしゃいませ！,어서 오세요!,Welcome!
+shop_farewell,ありがとうございました！,감사합니다!,Thank you!
+battle_start,戦闘開始！,전투 시작!,Battle Start!
+enemy_defeated,敵を倒した！,적을 처치했습니다!,Enemy Defeated!
+party_full,パーティーが満員です,파티가 가득 찼습니다,Party is full
+inventory_full,所持品が満杯です,인벤토리가 가득 찼습니다,Inventory is full
+not_enough_gold,ゴールドが足りません,골드가 부족합니다,Not enough gold
+equipment_equipped,{item_name}を装備しました,{item_name}을(를) 장착했습니다,Equipped {item_name}
+item_used,{item_name}を使用しました,{item_name}을(를) 사용했습니다,Used {item_name}
+spell_cast,{spell_name}を唱えた！,{spell_name}을(를) 시전했습니다!,Cast {spell_name}!
+damage_dealt,{target}に{damage}のダメージ！,{target}에게 {damage} 데미지!,{damage} damage to {target}!
+hp_recovered,HPが{amount}回復した！,HP가 {amount} 회복되었습니다!,Recovered {amount} HP!

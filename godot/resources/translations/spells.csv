@@ -1,0 +1,35 @@
+key,ja,ko,en
+spell.fire_ball,ファイアボール,파이어볼,Fire Ball
+spell.fire_storm,ファイアストーム,파이어 스톰,Fire Storm
+spell.ice_bolt,アイスボルト,아이스 볼트,Ice Bolt
+spell.blizzard,ブリザード,블리자드,Blizzard
+spell.thunder,サンダー,썬더,Thunder
+spell.thunder_storm,サンダーストーム,썬더 스톰,Thunder Storm
+spell.lightning,ライトニング,라이트닝,Lightning
+spell.heal,ヒール,힐,Heal
+spell.mass_heal,マスヒール,매스 힐,Mass Heal
+spell.full_heal,フルヒール,풀 힐,Full Heal
+spell.revive,リザレクション,부활,Revive
+spell.cure,キュア,치료,Cure
+spell.shield,シールド,실드,Shield
+spell.reflect,リフレクト,리플렉트,Reflect
+spell.protect,プロテクト,프로텍트,Protect
+spell.haste,ヘイスト,헤이스트,Haste
+spell.slow,スロウ,슬로우,Slow
+spell.poison,ポイズン,독,Poison
+spell.paralyze,パラライズ,마비,Paralyze
+spell.silence,サイレンス,침묵,Silence
+spell.sleep,スリープ,수면,Sleep
+spell.confuse,コンフューズ,혼란,Confuse
+spell.blind,ブラインド,실명,Blind
+spell.dispel,ディスペル,디스펠,Dispel
+spell.teleport,テレポート,텔레포트,Teleport
+spell.meteor,メテオ,메테오,Meteor
+spell.holy,ホーリー,홀리,Holy
+spell.ultima,アルテマ,알테마,Ultima
+spell.death,デス,죽음,Death
+spell.drain,ドレイン,드레인,Drain
+spell.osmose,オスモーズ,오스모즈,Osmose
+spell.earthquake,アースクエイク,지진,Earthquake
+spell.tornado,トルネード,토네이도,Tornado
+spell.flood,フラッド,홍수,Flood

@@ -1,0 +1,36 @@
+key,ja,ko,en
+item.health_potion_small,小さなポーション,작은 체력 물약,Small Health Potion
+item.health_potion_medium,ポーション,중간 체력 물약,Health Potion
+item.health_potion_large,大きなポーション,큰 체력 물약,Large Health Potion
+item.mana_potion_small,小さなマナポーション,작은 마나 물약,Small Mana Potion
+item.mana_potion_medium,マナポーション,중간 마나 물약,Mana Potion
+item.mana_potion_large,大きなマナポーション,큰 마나 물약,Large Mana Potion
+item.revive_herb,復活草,부활 허브,Revive Herb
+item.antidote,解毒剤,해독제,Antidote
+item.stamina_drink,スタミナドリンク,스태미나 드링크,Stamina Drink
+item.elixir,エリクサー,엘릭서,Elixir
+item.phoenix_feather,不死鳥の羽,불사조 깃털,Phoenix Feather
+item.escape_scroll,脱出の巻物,탈출 두루마리,Escape Scroll
+item.warp_stone,ワープストーン,워프 스톤,Warp Stone
+item.tent,テント,텐트,Tent
+item.ration,携帯食料,휴대 식량,Ration
+item.iron_sword,鉄の剣,철검,Iron Sword
+item.steel_sword,鋼鉄の剣,강철검,Steel Sword
+item.holy_sword,聖剣,성검,Holy Sword
+item.demon_blade,魔剣,마검,Demon Blade
+item.leather_armor,皮の鎧,가죽 갑옷,Leather Armor
+item.chain_mail,チェインメイル,사슬 갑옷,Chain Mail
+item.plate_armor,プレートアーマー,판금 갑옷,Plate Armor
+item.holy_armor,聖なる鎧,성스러운 갑옷,Holy Armor
+item.wooden_shield,木の盾,나무 방패,Wooden Shield
+item.iron_shield,鉄の盾,철 방패,Iron Shield
+item.magic_shield,魔法の盾,마법 방패,Magic Shield
+item.hero_shield,英雄の盾,영웅의 방패,Hero's Shield
+item.power_ring,力の指輪,힘의 반지,Power Ring
+item.defense_ring,守りの指輪,수호의 반지,Defense Ring
+item.speed_boots,俊足のブーツ,신속의 장화,Speed Boots
+item.magic_robe,魔法のローブ,마법 로브,Magic Robe
+item.healing_staff,癒しの杖,치유의 지팡이,Healing Staff
+item.fire_staff,炎の杖,화염의 지팡이,Fire Staff
+item.ice_wand,氷の魔法棒,얼음 마법봉,Ice Wand
+item.thunder_rod,雷の杖,번개의 지팡이,Thunder Rod
