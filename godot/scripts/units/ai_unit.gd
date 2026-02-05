@@ -95,11 +95,13 @@ var personality_params: Dictionary = {
 	}
 }
 
+var magic_system: MagicSystem = null
+
 func _ready() -> void:
 	super._ready()
 	_apply_personality()
 
-	# combat_system은 MainGameController 또는 UnitSpawner에서 주입
+	# combat_system, magic_system은 MainGameController 또는 UnitSpawner에서 주입
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -364,6 +366,16 @@ func _ai_attack() -> void:
 
 	var distance = global_position.distance_to(target_enemy.global_position)
 
+	# 마법 시전 시도 (근접 사거리 밖이면)
+	if magic_system and not known_spells.is_empty() and distance > attack_range:
+		var damage_spell = _find_damage_spell()
+		if damage_spell and distance <= damage_spell.cast_range:
+			var can_cast = magic_system.can_cast(self, damage_spell)
+			if can_cast["can_cast"]:
+				magic_system.cast_spell(self, damage_spell, target_enemy)
+				return
+
+	# 근접 공격
 	if distance > attack_range:
 		_change_ai_state(AIState.CHASE)
 	else:
@@ -432,10 +444,32 @@ func _ai_defend() -> void:
 	else:
 		_change_ai_state(AIState.FOLLOW)
 
-## 지원 행동 (Phase 1 stub: 부상 아군 찾아 이동)
+## 지원 행동 (힐러/버퍼용)
 func _ai_support() -> void:
-	# Phase 1 stub: find wounded ally, move toward them
-	# Full spell casting in Phase 3
+	# MagicSystem으로 마법 시전 결정
+	if magic_system and not known_spells.is_empty():
+		var allies = GameManager.player_units if GameManager.player_units.has(self) else GameManager.enemy_units
+		var enemies = GameManager.enemy_units if GameManager.player_units.has(self) else GameManager.player_units
+
+		var decision = magic_system.ai_should_cast_spell(self, allies, enemies)
+		if decision["should_cast"]:
+			var spell = decision["spell"]
+			var target = decision["target"]
+
+			# 사거리 확인
+			var target_pos = target.global_position if target is Node else target
+			var distance = global_position.distance_to(target_pos)
+
+			if distance <= spell.cast_range:
+				# 시전
+				magic_system.cast_spell(self, spell, target)
+				return
+			else:
+				# 사거리 밖 - 이동
+				_move_towards(target_pos)
+				return
+
+	# 마법 없으면 기존 로직: 부상 아군 찾아 이동
 	var allies = GameManager.player_units
 	var wounded_ally = null
 	var lowest_hp_ratio = 1.0
@@ -452,7 +486,6 @@ func _ai_support() -> void:
 		var distance = global_position.distance_to(wounded_ally.global_position)
 		if distance > attack_range:
 			_move_towards(wounded_ally.global_position)
-		# Phase 3에서 힐 마법 시전 추가
 	elif leader and leader.is_alive:
 		_change_ai_state(AIState.FOLLOW)
 
@@ -528,3 +561,10 @@ func _execute_retreat_command() -> void:
 func clear_command() -> void:
 	current_command = SquadCommand.NONE
 	follow_distance = 80.0  # 기본값 복원
+
+## 공격 마법 찾기
+func _find_damage_spell() -> SpellData:
+	for spell in known_spells:
+		if spell.spell_type == SpellData.SpellType.DAMAGE:
+			return spell
+	return null

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq8nfp7k6wfkt"]
+
+[ext_resource type="Script" path="res://scripts/test/test_spell_database.gd" id="1_test"]
+
+[node name="SpellDatabaseTest" type="Node"]
+script = ExtResource("1_test")
