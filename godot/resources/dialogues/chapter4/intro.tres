@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter4_intro"
+title = "챕터 4 - 강과 늪"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "울창한 숲을 지나 일행은 광활한 습지대에 도착했다. 물안개가 자욱하게 깔려 있다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "진흙탕과 물웅덩이가 곳곳에 널려 있고, 정체불명의 생물들이 물 속에서 꿈틀거린다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "이 늪을 건너야 한다니... 물 속에서는 제대로 싸우기 힘들 것 같은데.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "다리가 보인다. 저기로 가면 안전할 것 같다.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "하지만 다리 위에 적들이 진을 치고 있어. 조심해야겠어.",
+"event": "set_flag:chapter4_started",
+"next": ""
+}]

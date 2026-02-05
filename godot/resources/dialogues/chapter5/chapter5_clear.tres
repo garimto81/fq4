@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter5_clear"
+title = "챕터 5 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "산 정상의 거대한 얼음 거인을 쓰러뜨리자, 눈보라가 잦아들었다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "드디어... 정상을 넘었어. 하산길은 훨씬 수월할 거야.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "모두 고생했다. 우리의 여정은 이제 절반을 넘어섰어.",
+"event": "set_flag:chapter5_cleared",
+"next": ""
+}]

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "corrupted_noble"
+display_name = "Corrupted Noble"
+description = "A noble fallen to darkness and poison"
+enemy_type = 2
+base_hp = 450
+base_mp = 70
+base_atk = 28
+base_def = 18
+base_spd = 65
+base_lck = 9
+attack_range = 65.0
+detection_range = 230.0
+ai_tick_interval = 0.3
+exp_reward = 280
+gold_reward = 150
+drop_table = []
+hp_per_level = 45
+atk_per_level = 5
+def_per_level = 3

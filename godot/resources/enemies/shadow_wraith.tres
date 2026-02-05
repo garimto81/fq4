@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "shadow_wraith"
+display_name = "Shadow Wraith"
+description = "A ghostly apparition that feeds on life energy"
+enemy_type = 1
+base_hp = 50
+base_mp = 60
+base_atk = 18
+base_def = 3
+base_spd = 95
+base_lck = 8
+attack_range = 55.0
+detection_range = 190.0
+ai_tick_interval = 0.3
+exp_reward = 35
+gold_reward = 20
+drop_table = []
+hp_per_level = 8
+atk_per_level = 3
+def_per_level = 1

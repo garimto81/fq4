@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "water_elemental"
+display_name = "Water Elemental"
+description = "A living being of pure water"
+enemy_type = 1
+base_hp = 80
+base_mp = 40
+base_atk = 12
+base_def = 6
+base_spd = 75
+base_lck = 5
+attack_range = 50.0
+detection_range = 180.0
+ai_tick_interval = 0.35
+exp_reward = 25
+gold_reward = 15
+drop_table = []
+hp_per_level = 12
+atk_per_level = 2
+def_per_level = 1

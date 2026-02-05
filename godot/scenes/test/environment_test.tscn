@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj2k7x8y9z"]
+
+[ext_resource type="Script" path="res://scripts/systems/environment_system.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/status_effect_system.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/test/test_environment_system.gd" id="3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(200, 200)
+
+[node name="EnvironmentTest" type="Node2D"]
+script = ExtResource("3")
+
+[node name="StatusEffectSystem" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="EnvironmentSystem" type="Node" parent="."]
+script = ExtResource("1")
+
+[node name="WaterZone" type="Area2D" parent="."]
+position = Vector2(100, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterZone"]
+shape = SubResource("RectangleShape2D_1")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="ColdZone" type="Area2D" parent="."]
+position = Vector2(400, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColdZone"]
+shape = SubResource("RectangleShape2D_1")
+debug_color = Color(0.5, 0.5, 1, 0.42)
+
+[node name="DarkZone" type="Area2D" parent="."]
+position = Vector2(700, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DarkZone"]
+shape = SubResource("RectangleShape2D_1")
+debug_color = Color(0.3, 0.3, 0.3, 0.42)
+
+[node name="PoisonZone" type="Area2D" parent="."]
+position = Vector2(100, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PoisonZone"]
+shape = SubResource("RectangleShape2D_1")
+debug_color = Color(0.5, 0.8, 0, 0.42)
+
+[node name="FireZone" type="Area2D" parent="."]
+position = Vector2(400, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireZone"]
+shape = SubResource("RectangleShape2D_1")
+debug_color = Color(1, 0.3, 0, 0.42)
+
+[node name="TestUnit" type="CharacterBody2D" parent="." groups=["units"]]
+position = Vector2(640, 360)
+
+[node name="ColorRect" type="ColorRect" parent="TestUnit"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0, 1, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)

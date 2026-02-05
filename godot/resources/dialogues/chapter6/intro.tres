@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter6_intro"
+title = "챕터 6 - 고대 유적"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "고대 문명의 흔적이 남은 거대한 유적. 돌기둥들이 무너져 내려 길을 막고 있다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "입구를 지나자 어둠이 일행을 삼킨다. 횃불조차 희미하게 빛날 뿐이다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "시야가 너무 좁아. 적이 어디서 나타날지 알 수 없어.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "천천히 가자. 벽에 손을 대고 길을 찾아보자.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "저기... 마법진이 빛나고 있어. 혹시 마법 증폭 구역일지도 몰라.",
+"event": "set_flag:chapter6_started",
+"next": ""
+}]

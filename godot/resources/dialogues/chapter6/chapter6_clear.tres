@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter6_clear"
+title = "챕터 6 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "리치를 쓰러뜨리자 유적 전체가 빛을 되찾기 시작했다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "어둠이 사라지고 있어. 저 벽에 고대 문자가 새겨져 있어.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "이 유적에 담긴 비밀... 언젠가 다시 돌아와야 할지도 모르겠어.",
+"event": "set_flag:chapter6_cleared",
+"next": ""
+}]

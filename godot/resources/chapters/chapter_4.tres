@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 4
+chapter_name = "강과 늪"
+chapter_subtitle = "물의 시련"
+description = "넓은 습지대를 건너야 한다. 물 속에서는 이동이 느려지고, 다리를 확보해야 전투가 유리해진다."
+maps = ["res://scenes/maps/chapter4/river_crossing.tscn", "res://scenes/maps/chapter4/swamp_maze.tscn", "res://scenes/maps/chapter4/water_temple.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter4/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter4/chapter4_clear.tres"
+clear_flags = ["swamp_beast_defeated", "water_temple_cleared"]
+boss_map = "res://scenes/maps/chapter4/water_temple.tscn"
+boss_enemy_id = "swamp_beast"
+bgm_path = "res://assets/audio/bgm/chapter4_theme.ogg"

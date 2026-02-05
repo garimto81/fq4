@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter7_intro"
+title = "챕터 7 - 독의 저택"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "화려했을 저택은 이제 부패와 독기로 가득하다. 벽은 녹슬고, 정원은 시들어 있다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "공기마저 무겁고 질척이며, 숨을 쉴 때마다 목이 따갑다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "이 독기... 오래 있으면 위험해. 해독제가 필요할 거야.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "저택 어딘가에 해독제가 있을지도 몰라. 빠르게 탐색하자.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "저 귀족... 정말 살아 있는 걸까? 뭔가 이상해.",
+"event": "set_flag:chapter7_started",
+"next": ""
+}]

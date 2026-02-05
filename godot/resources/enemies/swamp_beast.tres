@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "swamp_beast"
+display_name = "Swamp Beast"
+description = "A monstrous creature lurking in the swamp"
+enemy_type = 2
+base_hp = 400
+base_mp = 30
+base_atk = 25
+base_def = 15
+base_spd = 50
+base_lck = 6
+attack_range = 70.0
+detection_range = 220.0
+ai_tick_interval = 0.3
+exp_reward = 200
+gold_reward = 100
+drop_table = []
+hp_per_level = 40
+atk_per_level = 5
+def_per_level = 3

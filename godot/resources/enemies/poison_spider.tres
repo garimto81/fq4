@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "poison_spider"
+display_name = "Poison Spider"
+description = "A venomous spider with deadly toxins"
+enemy_type = 1
+base_hp = 40
+base_mp = 20
+base_atk = 10
+base_def = 4
+base_spd = 85
+base_lck = 6
+attack_range = 40.0
+detection_range = 160.0
+ai_tick_interval = 0.35
+exp_reward = 20
+gold_reward = 12
+drop_table = []
+hp_per_level = 7
+atk_per_level = 2
+def_per_level = 1

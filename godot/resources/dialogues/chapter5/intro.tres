@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter5_intro"
+title = "챕터 5 - 설산"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "백설이 덮인 산맥. 매서운 바람이 얼굴을 후려친다.",
+"next": "narrator_2"
+}, {
+"id": "narrator_2",
+"speaker": "나레이터",
+"portrait": "",
+"text": "발밑의 눈이 삐걱거리며 울부짖고, 멀리 산 정상에는 검은 구름이 드리워져 있다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "이 추위... 오래 버티기 힘들 거야. 빨리 쉴 곳을 찾아야 해.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "저기 동굴이 보인다. 일단 저곳으로 피하자.",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "좋아. 하지만 동굴에도 위험이 도사릴지 몰라. 경계를 늦추지 말자.",
+"event": "set_flag:chapter5_started",
+"next": ""
+}]

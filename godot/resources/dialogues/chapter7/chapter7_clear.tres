@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter7_clear"
+title = "챕터 7 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "부패한 귀족이 쓰러지자 저택의 독기가 서서히 사라지기 시작했다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "이제야 숨을 쉴 수 있겠어. 정말 끔찍한 곳이었어.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "이 저택의 비밀... 귀족은 대체 왜 이런 곳을 만들었을까?",
+"next": "companion_2"
+}, {
+"id": "companion_2",
+"speaker": "동료",
+"portrait": "",
+"text": "어쨌든, 우리는 살아남았어. 다음 여정을 준비하자.",
+"event": "set_flag:chapter7_cleared",
+"next": ""
+}]

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "ice_wolf"
+display_name = "Ice Wolf"
+description = "A fierce wolf adapted to freezing temperatures"
+enemy_type = 1
+base_hp = 60
+base_mp = 10
+base_atk = 15
+base_def = 5
+base_spd = 110
+base_lck = 7
+attack_range = 45.0
+detection_range = 200.0
+ai_tick_interval = 0.3
+exp_reward = 30
+gold_reward = 18
+drop_table = []
+hp_per_level = 10
+atk_per_level = 2
+def_per_level = 1

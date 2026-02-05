@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 7
+chapter_name = "독의 저택"
+chapter_subtitle = "부패한 귀족"
+description = "독으로 가득한 저택. 해독제 없이는 살아남기 힘들다. 부패한 귀족의 비밀을 파헤쳐야 한다."
+maps = ["res://scenes/maps/chapter7/mansion_entrance.tscn", "res://scenes/maps/chapter7/poison_garden.tscn", "res://scenes/maps/chapter7/noble_chamber.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter7/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter7/chapter7_clear.tres"
+clear_flags = ["corrupted_noble_defeated", "mansion_cleared"]
+boss_map = "res://scenes/maps/chapter7/noble_chamber.tscn"
+boss_enemy_id = "corrupted_noble"
+bgm_path = "res://assets/audio/bgm/chapter7_theme.ogg"

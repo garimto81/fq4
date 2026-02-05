@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter4_clear"
+title = "챕터 4 클리어"
+start_node = "start"
+nodes = [{
+"id": "start",
+"speaker": "나레이터",
+"portrait": "",
+"text": "늪의 주인을 물리치고, 일행은 드디어 습지를 탈출했다.",
+"next": "companion_1"
+}, {
+"id": "companion_1",
+"speaker": "동료",
+"portrait": "",
+"text": "휴... 이제 발이 마를 수 있겠어. 정말 힘든 전투였어.",
+"next": "hero_1"
+}, {
+"id": "hero_1",
+"speaker": "주인공",
+"portrait": "",
+"text": "하지만 우리는 해냈다. 다음 여정도 이렇게 함께 헤쳐나가자.",
+"event": "set_flag:chapter4_cleared",
+"next": ""
+}]

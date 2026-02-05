@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 6
+chapter_name = "고대 유적"
+chapter_subtitle = "어둠 속의 비밀"
+description = "어두운 지하 유적. 시야가 제한되고 감지 범위가 줄어든다. 하지만 마법 증폭 구역이 존재한다."
+maps = ["res://scenes/maps/chapter6/ruins_entrance.tscn", "res://scenes/maps/chapter6/underground_maze.tscn", "res://scenes/maps/chapter6/ancient_shrine.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter6/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter6/chapter6_clear.tres"
+clear_flags = ["lich_defeated", "ancient_shrine_cleared"]
+boss_map = "res://scenes/maps/chapter6/ancient_shrine.tscn"
+boss_enemy_id = "lich"
+bgm_path = "res://assets/audio/bgm/chapter6_theme.ogg"

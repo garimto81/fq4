@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ChapterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/chapters/chapter_data.gd" id="1_chapter"]
+
+[resource]
+script = ExtResource("1_chapter")
+chapter_id = 5
+chapter_name = "설산"
+chapter_subtitle = "혹한의 길"
+description = "눈 덮인 산맥. 추위가 피로를 빠르게 누적시킨다. 쉴 곳을 찾으며 신중하게 이동해야 한다."
+maps = ["res://scenes/maps/chapter5/mountain_path.tscn", "res://scenes/maps/chapter5/frozen_cave.tscn", "res://scenes/maps/chapter5/summit.tscn"]
+intro_dialogue = "res://resources/dialogues/chapter5/intro.tres"
+outro_dialogue = "res://resources/dialogues/chapter5/chapter5_clear.tres"
+clear_flags = ["frost_giant_defeated", "summit_reached"]
+boss_map = "res://scenes/maps/chapter5/summit.tscn"
+boss_enemy_id = "frost_giant"
+bgm_path = "res://assets/audio/bgm/chapter5_theme.ogg"
