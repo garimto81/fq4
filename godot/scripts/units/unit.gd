@@ -14,6 +14,12 @@ class_name Unit
 @export var move_speed: float = 100.0
 @export var attack_range: float = 50.0
 var known_spells: Array[SpellData] = []
+var combat_system: CombatSystem = null  # 전투 시스템 참조
+
+# Per-unit data systems (RefCounted)
+var stats_system: StatsSystem = null
+var experience_system: ExperienceSystem = null
+var equipment_system: EquipmentSystem = null
 
 # 현재 상태
 var current_hp: int
@@ -46,6 +52,9 @@ func _ready() -> void:
 
 	# CollisionShape2D 자동 설정 (없으면 생성)
 	_ensure_collision_shape()
+
+	# Per-unit data systems 초기화
+	_init_data_systems()
 
 func _physics_process(delta: float) -> void:
 	match current_state:
@@ -169,6 +178,44 @@ func cast_spell(spell: SpellData, target = null) -> bool:
 func learn_spell(spell: SpellData) -> void:
 	if spell and not known_spells.has(spell):
 		known_spells.append(spell)
+
+## Per-unit 데이터 시스템 초기화
+func _init_data_systems() -> void:
+	# StatsSystem 생성 및 초기화
+	stats_system = StatsSystem.new()
+	if stats_system.has_method("init"):
+		stats_system.init(self)
+
+	# ExperienceSystem 생성 및 초기화
+	experience_system = ExperienceSystem.new()
+	if experience_system.has_method("init"):
+		experience_system.init(self)
+
+	# EquipmentSystem 생성 및 초기화
+	equipment_system = EquipmentSystem.new()
+	if equipment_system.has_method("init"):
+		equipment_system.init(self)
+
+## 스탯 조회 (CombatSystem 연동용)
+func get_stat(stat_type: int) -> float:
+	if stats_system and stats_system.has_method("get_stat"):
+		return stats_system.get_stat(stat_type)
+
+	# Fallback: 기본 속성 반환
+	match stat_type:
+		0:  # ATK
+			return attack_power
+		1:  # DEF
+			return defense
+		2:  # SPD
+			return move_speed
+		_:
+			return 0.0
+
+## 경험치 획득 (CombatSystem이 호출)
+func gain_exp(amount: int) -> void:
+	if experience_system and experience_system.has_method("gain_exp"):
+		experience_system.gain_exp(amount)
 
 ## CollisionShape2D 자동 설정
 func _ensure_collision_shape() -> void:

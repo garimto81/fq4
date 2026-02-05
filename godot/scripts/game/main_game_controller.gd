@@ -26,6 +26,9 @@ var current_unit_index: int = 0
 var is_paused: bool = false
 var is_in_dialogue: bool = false
 
+# 시스템 참조
+var _combat_system: CombatSystem = null
+
 func _ready() -> void:
 	print("MainGameController: Starting game...")
 
@@ -38,6 +41,7 @@ func _ready() -> void:
 	var combat_system = CombatSystem.new()
 	combat_system.name = "CombatSystem"
 	add_child(combat_system)
+	_combat_system = combat_system  # 인스턴스 변수로 저장
 	print("CombatSystem created as scene-local node")
 
 	# 시작 맵 로드
@@ -45,6 +49,9 @@ func _ready() -> void:
 
 	# 초기 유닛 스폰
 	_spawn_initial_units()
+
+	# 기존 유닛들에 CombatSystem 주입
+	_inject_combat_system_to_all_units()
 
 	# UI 업데이트
 	_update_ui()
@@ -234,3 +241,18 @@ func _toggle_pause() -> void:
 	is_paused = !is_paused
 	get_tree().paused = is_paused
 	print("Game paused: ", is_paused)
+
+## 모든 유닛에 CombatSystem 주입
+func _inject_combat_system_to_all_units() -> void:
+	if not _combat_system:
+		return
+
+	for unit in GameManager.player_units:
+		if "combat_system" in unit:
+			unit.combat_system = _combat_system
+
+	for unit in GameManager.enemy_units:
+		if "combat_system" in unit:
+			unit.combat_system = _combat_system
+
+	print("CombatSystem injected to ", GameManager.player_units.size() + GameManager.enemy_units.size(), " units")

@@ -5,6 +5,9 @@ class_name StatsSystem
 ## HP, MP, ATK, DEF, SPD, LCK 스탯을 관리합니다.
 ## 기본 스탯 + 장비 보너스 + 버프를 계산합니다.
 
+# 소유 유닛 참조
+var owner_unit = null
+
 # 스탯 타입
 enum StatType {
 	HP,
@@ -42,7 +45,11 @@ signal stats_changed()
 signal buff_applied(stat: StatType, value: int, duration: float)
 signal buff_expired(stat: StatType)
 
-## 초기화
+## 초기화 (Unit._init_data_systems()에서 호출)
+func init(unit) -> void:
+	owner_unit = unit
+
+## 초기화 (구 버전 호환)
 func initialize(initial_stats: Dictionary) -> void:
 	for key in initial_stats:
 		if base_stats.has(key):
@@ -103,6 +110,10 @@ func get_final_stat(stat: StatType):
 	var buff_value = _get_buff_total(stat)
 
 	return base_value + equipment_value + buff_value
+
+## 스탯 조회 (CombatSystem 호환 - int 타입)
+func get_stat(stat_type: int) -> float:
+	return get_final_stat(stat_type)
 
 ## 버프 합계 계산
 func _get_buff_total(stat: StatType):

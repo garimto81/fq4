@@ -4,6 +4,8 @@ class_name UnitSpawner
 ##
 ## 플레이어, AI 유닛, 적 유닛을 동적으로 생성하고 배치합니다.
 
+var combat_system: CombatSystem = null
+
 # 유닛 프리팹 경로
 const PLAYER_UNIT_SCENE = "res://scenes/units/player_unit.tscn"
 const AI_UNIT_SCENE = "res://scenes/units/ai_unit.tscn"
@@ -79,6 +81,10 @@ func _spawn_ai_unit(pos: Vector2, is_player_team: bool) -> Node:
 	var unit = _create_unit_node("AIUnit")
 	unit.global_position = pos
 
+	# CombatSystem 주입
+	if combat_system and "combat_system" in unit:
+		unit.combat_system = combat_system
+
 	if is_player_team:
 		GameManager.register_unit(unit, true)
 	else:
@@ -91,6 +97,11 @@ func _spawn_ai_unit(pos: Vector2, is_player_team: bool) -> Node:
 func _spawn_enemy_unit(pos: Vector2) -> Node:
 	var unit = _create_unit_node("EnemyUnit")
 	unit.global_position = pos
+
+	# CombatSystem 주입
+	if combat_system and "combat_system" in unit:
+		unit.combat_system = combat_system
+
 	GameManager.register_unit(unit, false)
 	get_parent().add_child(unit)
 	return unit

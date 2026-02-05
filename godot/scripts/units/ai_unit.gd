@@ -53,7 +53,6 @@ var current_command: SquadCommand = SquadCommand.NONE
 var leader = null  # Unit  # 따라갈 리더 유닛
 var squad_id: int = 0    # 소속 부대 ID
 var squad_position: int = 0  # 부대 내 위치 (전환용)
-var combat_system: CombatSystem = null  # CombatSystem 참조
 
 var patrol_points: Array[Vector2] = []
 var current_patrol_index: int = 0
@@ -100,10 +99,7 @@ func _ready() -> void:
 	super._ready()
 	_apply_personality()
 
-	# CombatSystem 찾기 (부모 씬에서)
-	combat_system = get_node_or_null("../CombatSystem")
-	if not combat_system:
-		combat_system = get_tree().get_first_node_in_group("combat_system")
+	# combat_system은 MainGameController 또는 UnitSpawner에서 주입
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -436,10 +432,29 @@ func _ai_defend() -> void:
 	else:
 		_change_ai_state(AIState.FOLLOW)
 
-## 지원 행동
+## 지원 행동 (Phase 1 stub: 부상 아군 찾아 이동)
 func _ai_support() -> void:
-	# 아군 지원 (힐러/버퍼용)
-	pass
+	# Phase 1 stub: find wounded ally, move toward them
+	# Full spell casting in Phase 3
+	var allies = GameManager.player_units
+	var wounded_ally = null
+	var lowest_hp_ratio = 1.0
+
+	for ally in allies:
+		if ally == self or not ally.is_alive:
+			continue
+		var hp_ratio = float(ally.current_hp) / float(ally.max_hp)
+		if hp_ratio < lowest_hp_ratio and hp_ratio < 0.5:
+			lowest_hp_ratio = hp_ratio
+			wounded_ally = ally
+
+	if wounded_ally:
+		var distance = global_position.distance_to(wounded_ally.global_position)
+		if distance > attack_range:
+			_move_towards(wounded_ally.global_position)
+		# Phase 3에서 힐 마법 시전 추가
+	elif leader and leader.is_alive:
+		_change_ai_state(AIState.FOLLOW)
 
 ## 휴식 행동
 func _ai_rest() -> void:

@@ -4,6 +4,9 @@ class_name ExperienceSystem
 ##
 ## 적 처치 시 EXP 획득, 레벨업 처리를 담당합니다.
 
+# 소유 유닛 참조
+var owner_unit = null
+
 const MAX_LEVEL: int = 50
 
 # 레벨업 테이블 (LevelTable 리소스 사용 가능)
@@ -22,7 +25,11 @@ signal max_level_reached()
 func _init() -> void:
 	level_table = LevelTable.new()
 
-## 초기화
+## 초기화 (Unit._init_data_systems()에서 호출)
+func init(unit) -> void:
+	owner_unit = unit
+
+## 초기화 (구 버전 호환)
 func initialize(level: int = 1, exp: int = 0) -> void:
 	current_level = clamp(level, 1, MAX_LEVEL)
 	current_exp = exp

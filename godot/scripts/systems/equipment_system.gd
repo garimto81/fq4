@@ -4,6 +4,9 @@ class_name EquipmentSystem
 ##
 ## 무기, 방어구, 액세서리 장착/해제를 관리합니다.
 
+# 소유 유닛 참조
+var owner_unit = null
+
 # 장비 슬롯
 var equipped: Dictionary = {
 	EquipmentData.EquipmentSlot.WEAPON: null,
@@ -18,7 +21,11 @@ var stats_system: StatsSystem = null
 signal equipment_changed(slot: int, old_item: EquipmentData, new_item: EquipmentData)
 signal equipment_failed(slot: int, reason: String)
 
-## 초기화
+## 초기화 (Unit._init_data_systems()에서 호출)
+func init(unit) -> void:
+	owner_unit = unit
+
+## 초기화 (구 버전 호환)
 func initialize(stats: StatsSystem) -> void:
 	stats_system = stats
 	_recalculate_bonuses()
