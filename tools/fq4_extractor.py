@@ -140,13 +140,23 @@ class RGBEDecoder:
         Decompress Type 9 format (used by B_ and G_ files)
 
         Structure:
-        - 6-byte header
-        - 1024-byte flag table
-        - Compressed data
+        - 6-byte header (type, unknown, table_size)
+        - 1024-byte flag/symbol table
+        - Compressed data (9-bit codes referencing symbol table)
 
-        The flag table contains word entries:
-        - 0x00XX: Literal byte index
-        - 0xFFXX: Special command (repeat/run)
+        Symbol table entries (16-bit words):
+        - 0x00XX: Literal byte (output XX)
+        - 0xFFXX: Special command (XX=0xFF is end marker, else RLE)
+        - Other: Metadata or tree nodes (Entry[0] is metadata)
+
+        NOTE: This decoder is incomplete. The compression algorithm appears to
+        be a Huffman/LZ hybrid that requires reverse engineering of MAIN.EXE.
+        For reliable asset extraction, use DOSBox capture workflow instead:
+
+            python tools/dosbox_capture_workflow.py full
+
+        Current implementation attempts 9-bit symbol table lookup but produces
+        noisy output due to unknown bit-stream interpretation algorithm.
         """
         if len(data) < 6:
             return data
@@ -154,34 +164,80 @@ class RGBEDecoder:
         # Parse header
         table_size = struct.unpack('<H', data[4:6])[0]
 
-        # Skip header and flag table
+        # Skip header and read flag table
+        flag_table = data[6:6 + table_size]
         data_start = 6 + table_size
         if data_start >= len(data):
             return data
 
         compressed = data[data_start:]
 
-        # Try direct RLE on the compressed data
+        # Parse symbol table entries
+        entries = []
+        for i in range(0, min(1024, len(flag_table)), 2):
+            if i + 1 < len(flag_table):
+                word = struct.unpack('<H', flag_table[i:i + 2])[0]
+                entries.append(word)
+
+        # 9-bit code reader
         result = bytearray()
-        i = 0
+        bit_pos = 0
+        byte_idx = 0
 
-        while i < len(compressed) and len(result) < self.plane_size:
-            control = compressed[i]
-            i += 1
+        def read_9bits():
+            nonlocal bit_pos, byte_idx
+            if byte_idx >= len(compressed):
+                return None
+            val = 0
+            for i in range(9):
+                if byte_idx >= len(compressed):
+                    return None
+                byte = compressed[byte_idx]
+                bit = (byte >> bit_pos) & 1
+                val |= (bit << i)
+                bit_pos += 1
+                if bit_pos >= 8:
+                    bit_pos = 0
+                    byte_idx += 1
+            return val
 
-            if control >= 0x80:
-                count = control - 0x7F
-                if i < len(compressed):
-                    value = compressed[i]
-                    i += 1
-                    result.extend([value] * count)
-            else:
-                count = control + 1
-                if i + count <= len(compressed):
-                    result.extend(compressed[i:i+count])
-                    i += count
-                else:
+        # Decode using symbol table
+        while len(result) < self.plane_size:
+            code = read_9bits()
+            if code is None:
+                break
+
+            # Skip Entry[0] (metadata)
+            if code == 0:
+                continue
+
+            if code >= len(entries):
+                break
+
+            entry = entries[code]
+            hi = (entry >> 8) & 0xFF
+            lo = entry & 0xFF
+
+            if hi == 0x00:
+                # Literal byte
+                result.append(lo)
+            elif hi == 0xFF:
+                if lo == 0xFF:
+                    # End marker
                     break
+                elif lo == 0x00:
+                    # Single zero byte (special case - 0 is not in literal table)
+                    result.append(0)
+                else:
+                    # RLE: repeat previous byte (lo + 3) times
+                    repeat_count = lo + 3
+                    if len(result) > 0:
+                        result.extend([result[-1]] * repeat_count)
+                    else:
+                        result.extend([0] * repeat_count)
+            else:
+                # Unknown entry type - output lo byte as fallback
+                result.append(lo)
 
         return bytes(result)
 

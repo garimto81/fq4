@@ -159,6 +159,20 @@ output/
 3. **Phase 2**: Full Release - 전체 콘텐츠 + Switch 포팅
 4. **Phase 3**: Expansion - HD-2D 그래픽 DLC
 
+## 문서
+
+### 기술 문서
+
+- [PRD-0001: First Queen 4 리메이크 기획서](./docs/PRD-0001-first-queen-4-remake.md)
+- [FQ4MES 텍스트 복호화 최종 보고서](./docs/FQ4MES_FINAL_REPORT.md)
+- **[FQ4 게임 대사 모음](./docs/FQ4_DIALOGUE_COLLECTION.md)** - 복호화된 800개 메시지 분석 및 캐릭터별 대사
+
+### 관련 분석 문서
+
+- [확장 매핑 결과](./docs/EXTENDED_MAPPING_RESULTS.md)
+- [알려진 단어 분석](./docs/KNOWN_WORDS_ANALYSIS.md)
+- [텍스트 암호 분석](./docs/TEXT_CIPHER_ANALYSIS.md)
+
 ## 라이선스
 
 - POC 도구 코드: MIT License
