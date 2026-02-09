@@ -107,6 +107,10 @@ python tools/upscale_basic.py batch -i output/images -o output/images_hd -s 4
 
 참고: `steam_manager.gd`는 GodotSteam 플러그인 설치 후 활성화 (현재 autoload 미등록).
 
+### Godot 경로 매핑
+
+`res://` = `godot/` 디렉토리. Godot 프로젝트 루트는 `godot/` 이므로 `res://scripts/` = `godot/scripts/`.
+
 ### Gocha-Kyara 시스템 (핵심)
 
 플레이어는 1명만 직접 조작, 나머지 부대원은 AI가 자동 제어.
@@ -150,6 +154,35 @@ CombatSystem.damage_dealt → EffectManager 데미지 팝업
 CombatSystem.unit_killed → ExperienceSystem 경험치 처리
 ```
 
+### 씬-로컬 시스템 인스턴스 패턴
+
+`CombatSystem` 등 `class_name`이 있는 시스템은 Autoload가 아닌 **씬-로컬 노드**로 생성됨. `MainGameController._ready()`에서 `CombatSystem.new()`로 생성 후 `add_child()`. 각 유닛은 `get_tree().get_nodes_in_group("combat_system")[0]`으로 접근.
+
+### Input 매핑 (`project.godot`)
+
+| 액션 | 키보드 | 게임패드 | 용도 |
+|------|--------|----------|------|
+| `move_left/right/up/down` | WASD | 좌스틱 | 유닛 이동 |
+| `attack` | Space | A 버튼 | 공격 |
+| `confirm` | Enter | A 버튼 | 확인 |
+| `cancel` | ESC | B 버튼 | 취소 |
+| `command` | C | Y 버튼 | 부대 명령 |
+| `next_squad/prev_squad` | PgDn/PgUp | RB/LB | 부대 전환 |
+| `pause` | ESC | Start | 일시정지 |
+| `toggle_inventory` | I | - | 인벤토리 |
+
+유닛 전환은 GameManager에서 `ui_left`/`ui_right` (같은 부대), `ui_up`/`ui_down` (부대 간) 처리.
+
+### 충돌 레이어 (`MapManager`)
+
+| 레이어 | 값 | 용도 |
+|--------|-----|------|
+| WORLD | 1 | 벽, 지형 |
+| PLAYER | 2 | 플레이어 유닛 |
+| ENEMY | 4 | 적 유닛 |
+| TRIGGER | 8 | 이벤트 트리거 |
+| PROJECTILE | 16 | 투사체 |
+
 ### 게임 시스템 (`scripts/systems/`)
 
 | 시스템 | 역할 |
@@ -192,21 +225,35 @@ PoolManager.release("arrow", arrow)
 
 전체 순회 (`for unit in GameManager.enemy_units`) 대신 반드시 `SpatialHash` 활용.
 
+### 리소스 데이터 패턴
+
+게임 데이터는 `.tres` 리소스 파일과 커스텀 `Resource` 클래스로 관리:
+
+- `resources/chapters/chapter_*.tres` → `ChapterData` (챕터 메타)
+- `resources/dialogues/chapter*/` → `DialogueData` (대화 트리)
+- `resources/enemies/*.tres` → `EnemyData` (적 스탯)
+- `resources/equipment/*.tres` → `EquipmentData` (장비)
+- `resources/items/*.tres` → `ItemData` (아이템)
+
+정적 조회는 Database 클래스 (`scripts/data/`) 사용: `SpellDatabase.get_spell("fireball")`.
+
 ## GDScript 주의사항
 
-**타입 어노테이션 제한**: `class_name` 참조 타입을 시그널/변수 어노테이션에 쓸 수 없음 (스크립트 로드 순서 이슈).
+**타입 어노테이션 제한**: `class_name` 참조 타입을 시그널/변수 어노테이션에 쓸 수 없음 (스크립트 로드 순서 이슈). Autoload 간 참조도 동일.
 
 ```gdscript
 # ❌ 로드 순서 에러
 signal damage_dealt(attacker: Unit, target: Unit, damage: int)
 var controlled_unit: Unit = null
 
-# ✅ 무타입 사용
+# ✅ 무타입 + 주석
 signal damage_dealt(attacker, target, damage: int)
 var controlled_unit = null  # Unit
 ```
 
 **CharacterBody2D 기반**: Unit은 `CharacterBody2D` 상속 → `move_and_slide()` 사용.
+
+**Per-Unit 시스템**: `StatsSystem`, `ExperienceSystem`, `EquipmentSystem`은 `RefCounted` 기반으로 각 Unit 인스턴스에 개별 생성됨 (`_init_data_systems()`에서 초기화).
 
 ## 에셋 포맷
 

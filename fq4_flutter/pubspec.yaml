@@ -1,0 +1,75 @@
+name: fq4_flutter
+description: "First Queen 4 HD Renewal - Flutter/Flame/Rive"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.6.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Game Engine
+  flame: ^1.21.0
+  flame_tiled: ^1.20.0
+
+  # Animation
+  rive: ^0.13.0
+
+  # State Management
+  flutter_riverpod: ^2.6.0
+  riverpod_annotation: ^2.6.0
+
+  # Data
+  freezed_annotation: ^2.4.0
+  json_annotation: ^4.9.0
+
+  # Storage (Isar는 Phase 2에서 추가 - riverpod_generator 호환성 이슈)
+  shared_preferences: ^2.3.0
+  path_provider: ^2.1.0
+
+  # Audio
+  audioplayers: ^6.1.0
+  flame_audio: ^2.10.0
+
+  # Routing
+  go_router: ^14.0.0
+
+  # Utils
+  equatable: ^2.0.0
+  uuid: ^4.0.0
+  intl: ^0.19.0
+  collection: ^1.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.0
+  freezed: ^2.5.0
+  json_serializable: ^6.8.0
+  riverpod_generator: ^2.6.0
+  # isar_generator: Phase 2에서 추가 (riverpod_generator 호환성)
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/
+    - assets/rive/characters/
+    - assets/rive/enemies/
+    - assets/rive/effects/
+    - assets/rive/ui/
+    - assets/maps/
+    - assets/audio/bgm/
+    - assets/audio/sfx/
+    - assets/images/
+    - assets/fonts/
+
+  generate: true
