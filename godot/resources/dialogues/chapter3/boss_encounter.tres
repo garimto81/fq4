@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter3_boss_encounter"
+title = "어둠의 기사 조우"
+nodes = [{
+"id": "start",
+"speaker": "???",
+"text": "...이곳까지 왔나. 인간이여.",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "어둠의 기사",
+"text": "나는 어둠의 군단을 이끄는 자. 이 숲의 지배자다.",
+"next": "node_3"
+}, {
+"id": "node_3",
+"speaker": "아레스",
+"text": "마물들을 이끌고 왕국을 공격한 게 너군!",
+"next": "node_4"
+}, {
+"id": "node_4",
+"speaker": "어둠의 기사",
+"text": "우리의 목적을 막으려는가? 어리석은 짓이다.",
+"next": "node_5"
+}, {
+"id": "node_5",
+"speaker": "어둠의 기사",
+"text": "이 자리에서 쓰러져라!",
+"event": "start_battle:dark_knight",
+"next": ""
+}]
+start_node = "start"

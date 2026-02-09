@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter3_boss_victory"
+title = "어둠의 기사 격파"
+nodes = [{
+"id": "start",
+"speaker": "어둠의 기사",
+"text": "크윽... 이렇게 강할 줄이야...",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "아레스",
+"text": "항복해라! 더 이상 마물들을 이끌지 마!",
+"next": "node_3"
+}, {
+"id": "node_3",
+"speaker": "어둠의 기사",
+"text": "후후... 나는 시작에 불과하다...",
+"next": "node_4"
+}, {
+"id": "node_4",
+"speaker": "어둠의 기사",
+"text": "진정한 어둠은... 아직 깨어나지 않았다...",
+"next": "node_5"
+}, {
+"id": "node_5",
+"speaker": "",
+"text": "[어둠의 기사가 사라졌다]",
+"next": "node_6"
+}, {
+"id": "node_6",
+"speaker": "알레인",
+"text": "진정한 어둠이라니... 더 강한 적이 있다는 건가요?",
+"next": "node_7"
+}, {
+"id": "node_7",
+"speaker": "아레스",
+"text": "어떤 적이든 상관없어. 우리가 막아낼 거야.",
+"event": "set_flag:boss_dialogue_complete",
+"next": ""
+}]
+start_node = "start"

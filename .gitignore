@@ -31,6 +31,7 @@ desktop.ini
 
 # Output (generated files)
 output/
+download/
 
 # OMC state files
 .omc/
@@ -38,3 +39,24 @@ output/
 # Temp
 *.tmp
 *.bak
+nul
+
+# Godot executables
+*.exe
+*.exe.zip
+Godot_v4.4-stable_win64_console.exe
+
+# Icon
+FQ4.ico
+
+# URL bookmarks
+*.url
+
+# Legacy/Archive
+docs/archive/
+tools/legacy/
+
+# Godot generated files
+.godot/
+*.uid
+.import/

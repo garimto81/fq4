@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter3_clear"
+title = "Chapter 3 클리어"
+nodes = [{
+"id": "start",
+"speaker": "타로",
+"text": "첫 번째 보스를 물리쳤군. 대단해!",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "알레인",
+"text": "하지만 그의 말이 신경 쓰여요. 더 강한 적이 있다고 했잖아요.",
+"next": "node_3"
+}, {
+"id": "node_3",
+"speaker": "아레스",
+"text": "그래, 방심할 수 없어. 더 강해져야 해.",
+"next": "node_4"
+}, {
+"id": "node_4",
+"speaker": "아레스",
+"text": "마을로 돌아가서 다음 전투를 준비하자.",
+"next": "node_5"
+}, {
+"id": "node_5",
+"speaker": "",
+"text": "[Chapter 3 클리어!]",
+"event": "set_flag:chapter3_complete",
+"next": ""
+}]
+start_node = "start"

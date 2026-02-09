@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+dialogue_id = "chapter3_intro"
+title = "Chapter 3 - 어둠의 숲 진입"
+nodes = [{
+"id": "start",
+"speaker": "아레스",
+"text": "이곳이 어둠의 숲... 불길한 기운이 느껴진다.",
+"next": "node_2"
+}, {
+"id": "node_2",
+"speaker": "알레인",
+"text": "조심하세요. 이 숲에는 마물 군단의 수장 중 한 명이 있다고 합니다.",
+"next": "node_3"
+}, {
+"id": "node_3",
+"speaker": "타로",
+"text": "어둠의 기사라... 강한 적이겠군.",
+"next": "node_4"
+}, {
+"id": "node_4",
+"speaker": "아레스",
+"text": "두려워할 필요 없어. 우리는 함께니까.",
+"next": "node_5"
+}, {
+"id": "node_5",
+"speaker": "",
+"text": "[어둠의 숲을 향해 전진한다]",
+"event": "set_flag:chapter3_started",
+"next": ""
+}]
+start_node = "start"
