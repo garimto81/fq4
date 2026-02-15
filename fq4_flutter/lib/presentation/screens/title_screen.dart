@@ -45,6 +45,16 @@ class TitleScreen extends StatelessWidget {
               label: 'SETTINGS',
               onPressed: () => context.go('/settings'),
             ),
+            const SizedBox(height: 40),
+            Text(
+              '--- POC Tests ---',
+              style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            ),
+            const SizedBox(height: 8),
+            _TitleButton(
+              label: 'POC HUB',
+              onPressed: () => context.go('/poc-hub'),
+            ),
           ],
         ),
       ),

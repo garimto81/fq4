@@ -3,15 +3,16 @@ class AIConstants {
   AIConstants._();
 
   // AI 업데이트 간격
-  static const double allyTickInterval = 0.3;
-  static const double enemyTickInterval = 0.4;
+  static const double allyTickInterval = 0.15;
+  static const double enemyTickInterval = 0.2;
 
-  // 감지/거리 (논리 좌표 기준)
-  static const double allyDetectionRange = 200.0;
-  static const double enemyDetectionRange = 180.0;
+  // 감지/거리 (논리 좌표 기준, 전장 폭 ~1200px 기준)
+  static const double allyDetectionRange = 800.0;
+  static const double enemyDetectionRange = 600.0;
   static const double followDistance = 80.0;
   static const double spreadDistance = 40.0;
   static const double attackEngageRange = 150.0;
+  static const double defaultAttackRange = 60.0;
   static const double retreatDistance = 200.0;
 
   // 임계값

@@ -17,8 +17,9 @@ dependencies:
   flame: ^1.21.0
   flame_tiled: ^1.20.0
 
-  # Animation
-  rive: ^0.13.0
+  # Animation (Windows segfault 진단: 임시 비활성화)
+  # rive: ^0.13.0
+  # flame_rive: ^1.10.0
 
   # State Management
   flutter_riverpod: ^2.6.0
@@ -72,4 +73,4 @@ flutter:
     - assets/images/
     - assets/fonts/
 
-  generate: true
+  # generate: true  # l10n 미사용 - 필요 시 l10n.yaml 설정 후 활성화

@@ -3,12 +3,12 @@ class FatigueConstants {
   FatigueConstants._();
 
   // 피로도 증가량
-  static const double fatigueAttack = 10;
+  static const double fatigueAttack = 6;
   static const double fatigueSkill = 20;
-  static const double fatigueMovePerUnit = 0.1; // 10px당 1
+  static const double fatigueMovePerUnit = 0.04; // 10px당 1
 
   // 피로도 회복량 (/초)
-  static const double recoveryIdle = 1;
+  static const double recoveryIdle = 2.5;
   static const double recoveryRest = 5;
   static const double recoveryItem = 30;
 
